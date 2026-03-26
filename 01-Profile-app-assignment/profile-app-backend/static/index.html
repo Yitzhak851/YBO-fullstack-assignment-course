@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>User Profile</h1>
+      <p>Flask + HTML + CSS + JavaScript</p>
+    </header>
+
+    <div class="controls">
+      <label for="userSelect">Choose a user:</label>
+      <select id="userSelect">
+        <option value="1">Leanne Graham</option>
+        <option value="2">Ervin Howell</option>
+        <option value="3">Clementine Bauch</option>
+        <option value="4">Patricia Lebsack</option>
+        <option value="5">Chelsey Dietrich</option>
+        <option value="6">Mrs. Dennis Schulist</option>
+        <option value="7">Kurtis Weissnat</option>
+        <option value="8">Nicholas Runolfsdottir V</option>
+        <option value="9">Glenna Reichert</option>
+        <option value="10">Clementina DuBuque</option>
+      </select>
+      <button id="loadBtn">Load Profile</button>
+    </div>
+
+    <main id="profileCard" class="profile-card hidden">
+      <div class="profile-header">
+        <img id="profileImage" src="" alt="User avatar">
+        <div>
+          <h2 id="profileName"></h2>
+          <p id="profileEmail"></p>
+        </div>
+      </div>
+
+      <section class="bio-section">
+        <h3>Bio</h3>
+        <p id="profileBio"></p>
+      </section>
+
+      <section>
+        <h3>Posts</h3>
+        <ul id="postsList"></ul>
+      </section>
+    </main>
+
+    <p id="loadingText" class="status">Loading profile...</p>
+    <p id="errorText" class="status error hidden">Something went wrong while loading the profile.</p>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
