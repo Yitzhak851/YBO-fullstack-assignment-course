@@ -1,8 +1,27 @@
-var form = document.getElementById("search-form");
+// script.js   
+var app = angular.module("profileApp", []);
+
+app.controller("ProfileController", function($scope, $http) {
+    $scope.profiles = [];
+    $scope.newProfile = {};
+    
+    // Fetch profiles from the backend
+    $http.get("/api/profiles").then(function(response) {
+        $scope.profiles = response.data;
+    });
+    
+    // Add a new profile
+    $scope.addProfile = function() {
+        $http.post("/api/profiles", $scope.newProfile).then(function(response) {
+            $scope.profiles.push(response.data);
+            $scope.newProfile = {}; // Clear the form
+        });
+    };
+}); 
 
 form.addEventListener("submit", function (event) {
     event.preventDefault();
-    var city = document.getElementById("city-input").value.trim();
+    var city = document.getElementById("city-input  ").value.trim();
     if (!city) return;
 
     document.getElementById("error").textContent = "";
@@ -18,29 +37,5 @@ function parseJson(response) {
     return response.json();
 }
 
-function showWeather(data) {
-    document.getElementById("city-name").textContent = data.city;
-    document.getElementById("weather-icon").src = data.current.icon;
-    document.getElementById("temp").textContent = Math.round(data.current.temp) + "°C";
-    document.getElementById("description").textContent = data.current.description;
-    document.getElementById("current-weather").hidden = false;
-
-    var forecastList = document.getElementById("forecast-list");
-    forecastList.innerHTML = "";
-
-    for (var i = 0; i < data.forecast.length; i++) {
-        var f = data.forecast[i];
-        var div = document.createElement("div");
-        div.className = "forecast-item";
-        div.textContent = f.date + " — " + Math.round(f.temp) + "°C, " + f.description;
-        forecastList.appendChild(div);
-    }
-
-    document.getElementById("forecast").hidden = false;
-}
-
-function showError() {
-    document.getElementById("error").textContent = "Could not load weather. Check the city name.";
-    document.getElementById("current-weather").hidden = true;
-    document.getElementById("forecast").hidden = true;
-}
+// function showError() TODO: implement error handling for weather API
+    

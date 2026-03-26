@@ -1,56 +1,28 @@
-const userSelect = document.getElementById('userSelect');
-const loadBtn = document.getElementById('loadBtn');
-const profileCard = document.getElementById('profileCard');
-const loadingText = document.getElementById('loadingText');
-const errorText = document.getElementById('errorText');
-
-const profileImage = document.getElementById('profileImage');
-const profileName = document.getElementById('profileName');
-const profileEmail = document.getElementById('profileEmail');
-const profileBio = document.getElementById('profileBio');
-const postsList = document.getElementById('postsList');
-
-async function loadProfile(userId) {
-  loadingText.classList.remove('hidden');
-  errorText.classList.add('hidden');
-  profileCard.classList.add('hidden');
-
-  try {
-    const response = await fetch(`/api/profile/${userId}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch profile');
+// here i write the javascript code to fetch the profile data from the backend and display it on the frontend
+// i will use the fetch API to get the data from the backend and then display it on the frontend
+// function to fetch the profile data from the backend
+async function fetchProfile() {
+    try {
+        const response = await fetch('/api/profile');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const profileData = await response.json();
+        displayProfile(profileData);
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
     }
-
-    const data = await response.json();
-
-    profileImage.src = data.picture;
-    profileImage.alt = `${data.name} avatar`;
-    profileName.textContent = data.name;
-    profileEmail.textContent = data.email;
-    profileBio.textContent = data.bio;
-
-    postsList.innerHTML = '';
-    data.posts.forEach(post => {
-      const item = document.createElement('li');
-      item.innerHTML = `
-        <h4>${post.title}</h4>
-        <p>${post.body}</p>
-      `;
-      postsList.appendChild(item);
-    });
-
-    profileCard.classList.remove('hidden');
-  } catch (error) {
-    errorText.classList.remove('hidden');
-  } finally {
-    loadingText.classList.add('hidden');
-  }
 }
 
-loadBtn.addEventListener('click', () => {
-  loadProfile(userSelect.value);
-});
-
-window.addEventListener('DOMContentLoaded', () => {
-  loadProfile(userSelect.value);
-});
+// function to display the profile data on the frontend
+function displayProfile(profile) {
+    const profileContainer = document.getElementById('profile-container');
+    profileContainer.innerHTML = `
+        <h2>${profile.name}</h2>
+        <p><strong>Age:</strong> ${profile.age}</p>
+        <p><strong>Email:</strong> ${profile.email}</p>
+        <p><strong>Bio:</strong> ${profile.bio}</p>
+    `;
+}
+// call the fetchProfile function when the page loads
+window.onload = fetchProfile;

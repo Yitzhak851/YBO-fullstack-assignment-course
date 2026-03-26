@@ -1,46 +1,36 @@
-from flask import Flask, jsonify, render_template
-import requests
+# here i write the code for the backend of the profile app assignment
+# like we so at 00-General-files/demo-lecture-01/runi-demos/weather-demo-backend/app.py
+from flask import Flask, request, jsonify, redirect 
 
-app = Flask(__name__)
-
-JSONPLACEHOLDER_BASE = "https://jsonplaceholder.typicode.com"
-DICEBEAR_BASE = "https://api.dicebear.com/9.x/personas/svg"
-
-
-def fetch_json(url: str):
-    response = requests.get(url, timeout=10)
-    response.raise_for_status()
-    return response.json()
-
-
-def build_avatar_url(name: str) -> str:
-    seed = name.replace(" ", "-")
-    return f"{DICEBEAR_BASE}?seed={seed}&backgroundColor=b6e3f4,c0aede,d1d4f9"
-
+app = Flask(__name__, static_folder="static")
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return redirect("/static/index.html")   
 
+@app.route("/api/profile", methods=["POST"])
+def create_profile():
+    data = request.get_json()
+    name = data.get("name")
+    age = data.get("age")
+    bio = data.get("bio")
 
-@app.route("/api/profile/<int:user_id>")
-def profile(user_id: int):
-    user = fetch_json(f"{JSONPLACEHOLDER_BASE}/users/{user_id}")
-    posts = fetch_json(f"{JSONPLACEHOLDER_BASE}/posts?userId={user_id}")
+    if not name or not age or not bio:
+        return jsonify({"error": "Missing required fields"}), 400
 
-    profile_data = {
-        "id": user["id"],
-        "name": user["name"],
-        "picture": build_avatar_url(user["name"]),
-        "email": user["email"],
-        "bio": (
-            f"Hi, I'm {user['name']} from {user['address']['city']}. "
-            f"I work at {user['company']['name']} and you can reach me at {user['email']}."
-        ),
-        "posts": posts,
+    profile = {
+        "name": name,
+        "age": age,
+        "bio": bio
     }
-    return jsonify(profile_data)
 
+    return jsonify(profile), 201
 
 if __name__ == "__main__":
     app.run(debug=True)
+    # we can run the app using the command "python app.py" in the terminal
+
+# this code creates a simple Flask backend for the profile app assignment. 
+# It has one endpoint "/api/profile" that accepts POST requests with a JSON body containing 
+# the name, age, and bio of the profile. The endpoint validates the input and returns the created profile as a JSON response.
+
