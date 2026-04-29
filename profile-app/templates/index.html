@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main class="page-wrapper">
+        <h1 class="page-title">User Profile</h1>
+
+        <section class="profile-card">
+            
+            <img id="profilePicture" class="profile-picture" src="" alt="User profile picture">
+
+            <h2 id="userName" class="user-name">Loading...</h2>
+
+            <p class="profile-line">
+                <span class="label">Username:</span>
+                <span id="userUsername"></span>
+            </p>
+
+            <p class="profile-line">
+                <span class="label">Email:</span>
+                <span id="userEmail"></span>
+            </p>
+
+            <p class="profile-line">
+                <span class="label">Bio:</span>
+                <span id="userBio"></span>
+            </p>
+
+            <h3 class="posts-title">Posts</h3>
+
+            <div id="postsContainer" class="posts-container">
+                Loading posts...
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

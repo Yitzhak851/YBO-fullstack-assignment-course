@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f3f3f3;
+    color: #111;
+}
+
+.page-wrapper {
+    width: 430px;
+    margin: 0 auto;
+    padding: 10px 0 40px 0;
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 14px 0;
+}
+
+.profile-card {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 28px 24px;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.profile-picture {
+    width: 64px;
+    height: 64px;
+    display: block;
+    object-fit: contain;
+    margin-bottom: 34px;
+}
+
+.user-name {
+    font-size: 19px;
+    font-weight: 800;
+    margin: 0 0 16px 0;
+}
+
+.profile-line {
+    font-size: 12px;
+    margin: 9px 0;
+    line-height: 1.35;
+}
+
+.label {
+    font-weight: 800;
+}
+
+.posts-title {
+    font-size: 15px;
+    font-weight: 800;
+    margin: 24px 0 14px 0;
+}
+
+.post {
+    border-top: 1px solid #dcdcdc;
+    padding: 24px 0 22px 0;
+}
+
+.post-title {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: capitalize;
+    margin: 0 0 18px 0;
+}
+
+.post-body {
+    font-size: 12px;
+    color: #777;
+    line-height: 1.25;
+    margin: 0;
+}

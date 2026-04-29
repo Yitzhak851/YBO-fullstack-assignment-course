@@ -1,1 +1,0 @@
-# Here locate my pre-course assignment
