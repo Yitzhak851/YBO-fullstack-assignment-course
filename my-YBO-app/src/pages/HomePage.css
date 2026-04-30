@@ -1,0 +1,78 @@
+.home-page {
+  padding: 22px 35px;
+  background-color: #ffffff;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 35px;
+}
+
+.post-card {
+  background: white;
+  border-radius: 10px;
+  padding: 22px 28px;
+  height: 210px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.post-card h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #252b3a;
+}
+
+.email {
+  margin-top: 6px;
+  color: #5b5ff0;
+  font-size: 14px;
+}
+
+.fake-line {
+  height: 8px;
+  background-color: #f0f3f7;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.fake-line.long {
+  width: 95%;
+}
+
+.fake-line.medium {
+  width: 85%;
+}
+
+.fake-line.short {
+  width: 72%;
+}
+
+.dots {
+  color: #999;
+  margin-top: 10px;
+}
+
+.read-more-btn {
+  margin-top: 22px;
+  background: linear-gradient(90deg, #5b6df6, #7c4df4);
+  color: white;
+  border: none;
+  padding: 9px 27px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.load-more-btn {
+  display: block;
+  margin: 28px auto 0;
+  background: linear-gradient(90deg, #5b6df6, #7c4df4);
+  color: white;
+  border: none;
+  padding: 14px 60px;
+  border-radius: 30px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
