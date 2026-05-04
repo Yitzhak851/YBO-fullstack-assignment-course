@@ -21,21 +21,5 @@ The repository includes various assignments covering: <br>
 The main goal is to strengthen my skills in full stack development, <br>
 gain hands-on experience, and build a solid foundation for real-world applications. <br>
 
-## How to run this App - Steps
-1) Clone the repository <br>
-2) Navigate to the project directory <br>
-3) Install the required dependencies by running the following command in the terminal: <br>
-   ```
-   pip install -r requirements.txt
-   ```
-4) Run the application using the following command: <br>
-   ```
-   python app.py
-   ```
-gain hands-on experience, and build a solid foundation for real-world applications. <br>
-5) Open your web browser and go to `http://localhost:5000` to view the application. <br>
-
-
-------------------------------
 
 Feel free to explore the projects and follow my progress :))
