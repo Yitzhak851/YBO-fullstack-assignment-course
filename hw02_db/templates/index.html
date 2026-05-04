@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profiles</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">HW-02 Blog App</div>
+    <div class="nav-links">
+        <a href="/">Profiles</a>
+        <a href="/create-post">Create Post</a>
+        <a href="/global-feed">Global Feed</a>
+        <a href="/user-posts">User Posts</a>
+        <a href="/search-user">Search User</a>
+    </div>
+</nav>
+
+<main class="container">
+    <h1>User Profiles</h1>
+
+    <div class="grid">
+        {% for user in users %}
+        <div class="card">
+            <img 
+                class="avatar"
+                src="https://api.dicebear.com/7.x/personas/svg?seed={{ user.email }}"
+                alt="User avatar"
+            >
+
+            <h2>{{ user.name }}</h2>
+            <p class="email">{{ user.email }}</p>
+
+            <p class="description">
+                Name and email are loaded from MySQL. <br>
+                Avatar is loaded from DiceBear external API.
+            </p>
+
+            <a class="button" href="/profile/{{ user.id }}">View Profile</a>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

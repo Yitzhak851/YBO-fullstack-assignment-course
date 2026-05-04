@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">HW-02 Blog App</div>
+    <div class="nav-links">
+        <a href="/">Profiles</a>
+        <a href="/create-post">Create Post</a>
+        <a href="/global-feed">Global Feed</a>
+        <a href="/user-posts">User Posts</a>
+        <a href="/search-user">Search User</a>
+    </div>
+</nav>
+
+<main class="container">
+    <h1>Search User Profiles</h1>
+
+    <form class="form" method="POST">
+        <label>Search by name or email</label>
+        <input type="text" name="search" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if search_text %}
+        <h2>Results for "{{ search_text }}"</h2>
+
+        {% if users %}
+            <div class="grid">
+                {% for user in users %}
+                <div class="card">
+                    <img 
+                        class="avatar"
+                        src="https://api.dicebear.com/7.x/personas/svg?seed={{ user.email }}"
+                        alt="User avatar"
+                    >
+
+                    <h2>{{ user.name }}</h2>
+                    <p class="email">{{ user.email }}</p>
+                    <a class="button" href="/profile/{{ user.id }}">View Profile</a>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No users found.</p>
+        {% endif %}
+    {% endif %}
+</main>
+
+</body>
+</html>

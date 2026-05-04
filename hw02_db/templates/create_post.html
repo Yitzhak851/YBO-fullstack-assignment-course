@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">HW-02 Blog App</div>
+    <div class="nav-links">
+        <a href="/">Profiles</a>
+        <a href="/create-post">Create Post</a>
+        <a href="/global-feed">Global Feed</a>
+        <a href="/user-posts">User Posts</a>
+        <a href="/search-user">Search User</a>
+    </div>
+</nav>
+
+<main class="container">
+    <h1>Create New Post</h1>
+
+    {% if message %}
+        <p class="error">{{ message }}</p>
+    {% endif %}
+
+    <form class="form" method="POST">
+        <label>Title</label>
+        <input type="text" name="title" required>
+
+        <label>Body</label>
+        <textarea name="body" required></textarea>
+
+        <label>Author Email</label>
+        <input type="email" name="email" placeholder="alice@example.com" required>
+
+        <button type="submit">Create Post</button>
+    </form>
+</main>
+
+</body>
+</html>

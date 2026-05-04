@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Posts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">HW-02 Blog App</div>
+    <div class="nav-links">
+        <a href="/">Profiles</a>
+        <a href="/create-post">Create Post</a>
+        <a href="/global-feed">Global Feed</a>
+        <a href="/user-posts">User Posts</a>
+        <a href="/search-user">Search User</a>
+    </div>
+</nav>
+
+<main class="container">
+    <h1>Posts From Specific User</h1>
+
+    <form class="form" method="POST">
+        <label>User Email</label>
+        <input type="email" name="email" placeholder="alice@example.com" required>
+        <button type="submit">Search Posts</button>
+    </form>
+
+    {% if message %}
+        <p class="error">{{ message }}</p>
+    {% endif %}
+
+    {% if searched_email %}
+        <h2>Results for {{ searched_email }}</h2>
+
+        {% if posts %}
+            {% for post in posts %}
+            <div class="post-card">
+                <h2>{{ post.title }}</h2>
+                <p class="email">{{ post.email }}</p>
+                <p>{{ post.body }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            {% if not message %}
+                <p>No posts found for this user.</p>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</main>
+
+</body>
+</html>

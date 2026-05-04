@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global Feed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">HW-02 Blog App</div>
+    <div class="nav-links">
+        <a href="/">Profiles</a>
+        <a href="/create-post">Create Post</a>
+        <a href="/global-feed">Global Feed</a>
+        <a href="/user-posts">User Posts</a>
+        <a href="/search-user">Search User</a>
+    </div>
+</nav>
+
+<main class="container">
+    <h1>Global Feed</h1>
+
+    {% if posts %}
+        <div class="posts-grid">
+            {% for post in posts %}
+            <div class="post-card">
+                <h2>{{ post.title }}</h2>
+                <p class="email">{{ post.email }}</p>
+                <p>{{ post.body }}</p>
+
+                <a class="button" href="/profile/{{ post.user_id }}">
+                    View Author
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No posts yet.</p>
+    {% endif %}
+</main>
+
+</body>
+</html>
