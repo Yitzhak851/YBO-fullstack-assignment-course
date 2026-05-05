@@ -9,7 +9,7 @@ function SinglePost({ post }) {
   const shortText = post.body.split("\n").slice(0, 3).join("\n");
 
   return (
-    <Card sx={{ height: "100%", boxShadow: 3, borderRadius: 2 }}>
+    <Card sx={{ p: 2 }}>
       <CardContent>
         <Typography variant="h6" sx={{ fontWeight: "bold" }}>
           {post.title}
@@ -21,13 +21,13 @@ function SinglePost({ post }) {
 
         <Typography
           variant="body2"
-          sx={{ whiteSpace: "pre-line", minHeight: "70px" }}
+          sx={{ whiteSpace: "pre-line", minHeight: "80px" }}
         >
           {expanded ? post.body : shortText + "..."}
         </Typography>
 
-        <Box sx={{ mt: 3 }}>
-          <Button
+        <Box sx={{ mt: "auto", pt: 2 }}>
+        -  <Button
             variant="contained"
             size="small"
             onClick={() => setExpanded(!expanded)}

@@ -31,13 +31,13 @@ function Feed() {
     <Box sx={{ p: 4 }}>
       <Grid container spacing={3}>
         {posts.map((post) => (
-          <Grid item xs={12} md={6} key={post.id}>
+          <Grid item xs={12} sm={6} md={6} key={post.id}>
             <SinglePost post={post} />
           </Grid>
         ))}
       </Grid>
 
-      <Box sx={{ textAlign: "center", mt: 4 }}>
+      <Box sx={{ maxWidth: "1200px", mx: "auto" }}>
         {loading ? (
           <CircularProgress />
         ) : (
