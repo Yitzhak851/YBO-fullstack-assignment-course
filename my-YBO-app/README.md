@@ -1,10 +1,12 @@
-# React + Vite
-
+# HW-03 + HW-04: React + Vite Template
+This assignment focuses on setting up a React application using Vite, a modern build tool that provides fast development and optimized production builds. The template includes essential configurations for React development, including support for JSX, HMR (Hot Module Replacement), and ESLint rules to ensure code quality.
+We use templates to provide a starting point for your React application.
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
 <!-- 
 ## Live Demo
 

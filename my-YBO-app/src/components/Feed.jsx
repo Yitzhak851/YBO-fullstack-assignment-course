@@ -1,47 +1,52 @@
 import { useEffect, useState } from "react";
-import { Box, Grid, Button, CircularProgress } from "@mui/material";
-import { fetchPosts } from "../api/api";
+import { Box, Button, CircularProgress } from "@mui/material";
+import { useParams } from "react-router-dom";
 import SinglePost from "./SinglePost";
+import { fetchPosts } from "../api/api";
 
 function Feed() {
+  const { userId } = useParams();
+
   const [posts, setPosts] = useState([]);
   const [start, setStart] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const loadPosts = async () => {
-    try {
-      setLoading(true);
+  async function loadPosts(reset = false) {
+    setLoading(true);
 
-      const newPosts = await fetchPosts(start, 10);
+    const currentStart = reset ? 0 : start;
+    const newPosts = await fetchPosts(currentStart, 10, userId);
 
-      setPosts((prevPosts) => [...prevPosts, ...newPosts]);
-      setStart((prevStart) => prevStart + 10);
-    } catch (error) {
-      console.error("Error loading posts:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    setPosts(reset ? newPosts : [...posts, ...newPosts]);
+    setStart(currentStart + 10);
+    setLoading(false);
+  }
 
   useEffect(() => {
-    loadPosts();
-  }, []);
+    loadPosts(true);
+  }, [userId]);
 
   return (
     <Box sx={{ p: 4 }}>
-      <Grid container spacing={3}>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap: 3,
+          maxWidth: 1100,
+          mx: "auto",
+        }}
+      >
         {posts.map((post) => (
-          <Grid item xs={12} sm={6} md={6} key={post.id}>
-            <SinglePost post={post} />
-          </Grid>
+          <SinglePost key={post.id} post={post} />
         ))}
-      </Grid>
+      </Box>
 
-      <Box sx={{ maxWidth: "1200px", mx: "auto" }}>
+      <Box sx={{ textAlign: "center", mt: 4 }}>
         {loading ? (
           <CircularProgress />
         ) : (
-          <Button variant="contained" onClick={loadPosts}>
+          <Button variant="contained" onClick={() => loadPosts(false)}>
             Load More
           </Button>
         )}
