@@ -1,4 +1,4 @@
-# User Profile Web App
+# User Profile Web App (HW-01)
 This is a small full-stack web application built <br>
 for a Full Stack course assignment. <br>
 The app displays a user profile, including: <br>
