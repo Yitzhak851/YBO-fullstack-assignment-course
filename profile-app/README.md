@@ -10,6 +10,12 @@ The app displays a user profile, including: <br>
 - List of posts
 <br> This is the assignment from week number 1
 
+## Live Demo
+
+You can view the live project here:
+[Click here to open the app](https://ybo-fullstack-assignment-course-q4do-lqoluiech.vercel.app)
+
+
 # The instructions of this assignment:
 Build a small web app that shows a user's profile.
 It should display user's:
