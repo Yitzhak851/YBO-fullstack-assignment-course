@@ -1,6 +1,7 @@
-# Create Database and Table
-This is a small full-stack web application built <br>
-for a Full Stack course assignment. <br>
+# Create Database and Table (HW-02)
+This is a small full-stack web application built for a Full Stack course assignment. 
+The app displays a user profile, including: Name, Email, Avatar, and a list of posts created by the user.
+
 
 <!-- ## Live Demo
 
@@ -8,7 +9,8 @@ You can view the live project here:
 [Click here to open the app](https://ybo-fullstack-assignment-course-q4do-lqoluiech.vercel.app) -->
 
 # This folder contain Assignment Number 02
-This assignment is a small full-stack web application built for a Full Stack course assignment. The app displays a user profile, including:
+This assignment is a small full-stack web application built for a Full Stack course assignment. 
+The app displays a user profile, including:
 <br> This is the assignment from week number 02
 
 # Instructions for this assignment:
