@@ -13,9 +13,11 @@ function Feed() {
 
   async function loadPosts(reset = false) {
     setLoading(true);
-
+    
+    // the 2 variables that we define here are used to determine the starting point for fetching posts and to store the newly fetched posts.
     const currentStart = reset ? 0 : start;
     const newPosts = await fetchPosts(currentStart, 10, userId);
+    console.log("Fetched posts:", newPosts); // Log the fetched posts for debugging
 
     setPosts(reset ? newPosts : [...posts, ...newPosts]);
     setStart(currentStart + 10);

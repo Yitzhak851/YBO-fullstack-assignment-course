@@ -1,12 +1,10 @@
-// this file responsible for the toolbar component of the application, which includes the navigation links and the app title. It uses Material-UI components to create a responsive and visually appealing toolbar.
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
-// import { Link } from "@mui/material";
 import { Link } from "react-router-dom";
-
-
-
+import { useAuth } from "../auth/AuthContext";
 
 function ToolbarComponent() {
+  const { currentUser, isLoggedIn, logout } = useAuth();
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -14,9 +12,11 @@ function ToolbarComponent() {
           MyApp
         </Typography>
 
-        <Button variant="contained" color="warning" component={Link} to="/new-post">
-          + New Post
-        </Button>
+        {isLoggedIn && (
+          <Button variant="contained" color="warning" component={Link} to="/new-post">
+            + New Post
+          </Button>
+        )}
 
         <Box sx={{ flexGrow: 1 }} />
 
@@ -24,7 +24,22 @@ function ToolbarComponent() {
           <Button color="inherit" component={Link} to="/">Home</Button>
           <Button color="inherit" component={Link} to="/users">Users</Button>
           <Button color="inherit" component={Link} to="/about">About</Button>
-          <Button color="inherit" component={Link} to="/login">Login</Button>
+
+          {isLoggedIn ? (
+            <>
+              <Typography component="span" sx={{ mx: 2 }}>
+                {currentUser.email}
+              </Typography>
+
+              <Button color="warning" onClick={logout}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <Button color="inherit" component={Link} to="/login">
+              Login
+            </Button>
+          )}
         </Box>
       </Toolbar>
     </AppBar>

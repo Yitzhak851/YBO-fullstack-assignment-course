@@ -5,6 +5,7 @@ import Users from "./components/Users";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import NewPost from "./components/NewPost";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 function App() {
   return (
@@ -17,8 +18,7 @@ function App() {
         <Route path="/user-posts/:userId" element={<Feed />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/new-post" element={<NewPost />} />
-        
+        <Route path="/new-post" element={<ProtectedRoute> <NewPost /> </ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
