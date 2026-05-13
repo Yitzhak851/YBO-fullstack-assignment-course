@@ -1,0 +1,79 @@
+# This Temporary file is for me 
+# To see all the Home Work instroction at 1 Page:
+
+
+=================================================================================================================================================
+(HW-01) : Build small web app that shows a user's profile |
+Path : ~/YBO-fullstack-assignment-course/profile-app
+It should display user’s: 
+● name
+● picture
+● email
+● bio
+● list of posts.
+We need to use Python with Flask for the backend and HTML+CSS+JavaScript for the frontend. 
+And use these free APIs for this task: 
+● JSONPlaceholder (fake users and posts) https://jsonplaceholder.typicode.com
+● DiceBear (cartoon avatar illustrations) https://www.dicebear.com
+=================================================================================================================================================
+(HW-02) : Create Database and Table | Path : ~/YBO-fullstack-assignment-course/hw02_db
+● Design a schema of your database using https://dbdiagram.io/
+● Install MySQL locally https://dev.mysql.com/downloads/mysql/
+● Install MySQL connector for Python: pip3 install mysql-connector-python
+● Create your database and tables through the mysql CLI
+● Install Postman https://www.postman.com/
+● Implement the following tables: users (id, name, email), posts (id, author_id, title, body).
+● Implement a page to create new posts with fields: title, body,author (email).
+● Implement a page to see all posts (global feed).
+● Implement a page to see posts from a specific user.
+● Connect with HW1: 
+○ Update the profile page to use database data for existing fields and external services for everything else.
+○ Implement a page to search for user profiles
+=================================================================================================================================================
+(HW-03) : Add 'Home page' / 'Feed' to my blog | Path : ~/YBO-fullstack-assignment-course/my-YBO-app
+1. Create new React project
+2. Install Material UI
+3. Create TopBar Component:
+     a. AppName on the left
+     b. Menu buttons on the right
+     c. use MUI AppBar and Toolbar to design
+4. Create SinglePost Componenty:
+     a. Display title, email and first 3 lines
+     b. Button Read more - should expand full text
+     c. use MUI Card to design
+5. Create api.js
+     a. implement function to fetch posts
+6. Create Feed Component:
+     a. at the start fetches 10 posts from all users and display them
+     b. Load more - should fetch and display next 10 posts
+     c. Display spinner when in progress
+     d. use MUI Grid and Progress to design
+=================================================================================================================================================
+(HW-04) : Add 'Users page, User Posts page' + 'Login & Signup' + 'New Post page' to my-blog | Path : ~/YBO-fullstack-assignment-course/my-YBO-app
+Users page, User Posts page
+     1. Install React router
+     2. Create route “/users”
+     3. Create route “/user-posts/:userId”
+     4. Create Search component
+     5. Create User component
+     6. Create Users component
+     7. Fetch first 10 users accordingly to the search field and display
+     8. Load more - should fetch and display next 10 users
+     9. Improve Feed component to display posts from specific user
+
+Login & Signup
+     1. Create route “/login”
+     2. Create route “/signup”
+     3. Create Login component
+     4. Create Signup component
+
+New Post page
+     1. Create route “/new-post”
+     2. Create NewPost component
+
+=================================================================================================================================================
+(HW-05) : Add the following flows to my blog | Path : ~/YBO-fullstack-assignment-course/my-YBO-app
+○ User Signup
+○ User Login
+○ User Logout
+=================================================================================================================================================
