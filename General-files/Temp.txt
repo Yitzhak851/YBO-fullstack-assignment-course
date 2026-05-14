@@ -1,9 +1,8 @@
 # This Temporary file is for me 
 # To see all the Home Work instroction at 1 Page:
-
-
 =================================================================================================================================================
 (HW-01) : Build small web app that shows a user's profile |
+=================================================================================================================================================
 Path : ~/YBO-fullstack-assignment-course/profile-app
 It should display user’s: 
 ● name
@@ -17,6 +16,7 @@ And use these free APIs for this task:
 ● DiceBear (cartoon avatar illustrations) https://www.dicebear.com
 =================================================================================================================================================
 (HW-02) : Create Database and Table | Path : ~/YBO-fullstack-assignment-course/hw02_db
+=================================================================================================================================================
 ● Design a schema of your database using https://dbdiagram.io/
 ● Install MySQL locally https://dev.mysql.com/downloads/mysql/
 ● Install MySQL connector for Python: pip3 install mysql-connector-python
@@ -31,6 +31,7 @@ And use these free APIs for this task:
 ○ Implement a page to search for user profiles
 =================================================================================================================================================
 (HW-03) : Add 'Home page' / 'Feed' to my blog | Path : ~/YBO-fullstack-assignment-course/my-YBO-app
+=================================================================================================================================================
 1. Create new React project
 2. Install Material UI
 3. Create TopBar Component:
@@ -50,6 +51,7 @@ And use these free APIs for this task:
      d. use MUI Grid and Progress to design
 =================================================================================================================================================
 (HW-04) : Add 'Users page, User Posts page' + 'Login & Signup' + 'New Post page' to my-blog | Path : ~/YBO-fullstack-assignment-course/my-YBO-app
+=================================================================================================================================================
 Users page, User Posts page
      1. Install React router
      2. Create route “/users”
@@ -60,19 +62,17 @@ Users page, User Posts page
      7. Fetch first 10 users accordingly to the search field and display
      8. Load more - should fetch and display next 10 users
      9. Improve Feed component to display posts from specific user
-
 Login & Signup
      1. Create route “/login”
      2. Create route “/signup”
      3. Create Login component
      4. Create Signup component
-
 New Post page
      1. Create route “/new-post”
      2. Create NewPost component
-
 =================================================================================================================================================
 (HW-05) : Add the following flows to my blog | Path : ~/YBO-fullstack-assignment-course/my-YBO-app
+=================================================================================================================================================
 ○ User Signup
 ○ User Login
 ○ User Logout
