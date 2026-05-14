@@ -1,14 +1,16 @@
 # Create Database and Table
 from flask import Flask, render_template, request, redirect, url_for
+
 # MySQL Connector for Python
 import mysql.connector
+
 # Error handling for MySQL operations
 from mysql.connector import Error
 
 # Initialize Flask app
 app = Flask(__name__)
 
-# Database configuration
+ # Database configuration
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
@@ -21,28 +23,31 @@ def get_db_connection():
     return mysql.connector.connect(**DB_CONFIG)
 
 
-# Route for the home page
+# Route 'home page'
 @app.route("/")
+
 # fofo to display the home page with a list of users
 def index():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-
+    # fofo to fetch all users from the database and display them on the home page
     cursor.execute("SELECT id, name, email FROM users ORDER BY id")
     users = cursor.fetchall()
-
+    # fofo to close the database connection after fetching the users
     cursor.close()
     conn.close()
-
+    
     return render_template("index.html", users=users)
 
 
-# Route for creating a new post
+# Route 'creating-new-post'
 @app.route("/create-post", methods=["GET", "POST"])
+
 # fofo to handle the creation of a new post
 def create_post():
+    # fofo to handle both GET and POST requests for creating a new post, allowing users to submit a form with the post title, body, and their email
     message = None
-
+    
     if request.method == "POST":
         title = request.form.get("title")
         body = request.form.get("body")
@@ -75,10 +80,12 @@ def create_post():
     return render_template("create_post.html", message=message)
 
 
-# Route for displaying the global feed of posts
+# Route 'global feed of posts'
 @app.route("/global-feed")
+
 # fofo to display all posts in the global feed, showing the post title, body, and author information
 def global_feed():
+    #  variable to fetch all posts from the database along with their author information and display them in a global feed, ordered by the most recent posts first
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
@@ -98,15 +105,16 @@ def global_feed():
     )
 
     posts = cursor.fetchall()
-
+    # fofo to close the database connection after fetching the posts for the global feed
     cursor.close()
     conn.close()
 
     return render_template("global_feed.html", posts=posts)
 
 
-# Route for displaying posts by a specific user
+# Route 'posts by a specific user'
 @app.route("/user-posts", methods=["GET", "POST"])
+
 # fofo to display posts by a specific user based on their email, showing the post title, body, and author information
 def user_posts():
     posts = []
@@ -153,8 +161,9 @@ def user_posts():
     )
 
 
-# Route for searching users by name or email
+# Route 'searching users by name or email'
 @app.route("/search-user", methods=["GET", "POST"])
+
 # fofo to search for users by their name or email, displaying the matching users in a list
 def search_user():
     users = []
@@ -184,8 +193,9 @@ def search_user():
     return render_template("search_user.html", users=users, search_text=search_text)
 
 
-# Route for displaying a user's profile and their posts
+# Route 'user's profile & posts'
 @app.route("/profile/<int:user_id>")
+
 # fofo to display a user's profile based on their user ID, showing their name, email, and a list of their posts
 def profile(user_id):
     conn = get_db_connection()

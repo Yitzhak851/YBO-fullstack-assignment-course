@@ -2,11 +2,14 @@
 This is a small full-stack web application built for a Full Stack course assignment. 
 The app displays a user profile, including: Name, Email, Avatar, and a list of posts created by the user.
 
-
-<!-- ## Live Demo
-
-You can view the live project here:
-[Click here to open the app](https://ybo-fullstack-assignment-course-q4do-lqoluiech.vercel.app) -->
+# How to Run the Application
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Create a virtual environment and activate it.
+4. Install the required dependencies using `pip install -r requirements.txt`.
+5. Set up your MySQL database and tables as per the instructions.
+6. Run the Flask application using `python app.py`.
+7. Open your web browser and go to `http://localhost:5000` to view the user profile web app and access the various features implemented in this assignment.
 
 # This folder contain Assignment Number 02
 This assignment is a small full-stack web application built for a Full Stack course assignment. 
@@ -67,11 +70,10 @@ HW-02/
     └── search_user.html    
 ```
 
-# How to Run the Application
-1. Clone the repository to your local machine.
-2. Navigate to the project directory.
-3. Create a virtual environment and activate it.
-4. Install the required dependencies using `pip install -r requirements.txt`.
-5. Set up your MySQL database and tables as per the instructions.
-6. Run the Flask application using `python app.py`.
-7. Open your web browser and go to `http://localhost:5000` to view the user profile web app and access the various features implemented in this assignment.
+
+
+
+<!-- ## Live Demo
+
+You can view the live project here:
+[Click here to open the app](https://ybo-fullstack-assignment-course-q4do-lqoluiech.vercel.app) -->
