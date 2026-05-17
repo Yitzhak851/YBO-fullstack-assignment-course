@@ -1,0 +1,6 @@
+Flask
+Flask-Cors
+Flask-SQLAlchemy
+PyJWT
+Werkzeug
+python-dotenv

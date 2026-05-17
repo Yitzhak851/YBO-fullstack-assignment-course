@@ -2,6 +2,38 @@
 
 # This folder contain my FINAL PROJECT for course 3172
 
+# Hot to run the project:
+## How to run the project - backend: 
+After cloning the repository, navigate to the project folder and follow these steps: <br>
+into the backend folder: <br>
+run the following commands: <br>
+```python -m venv venv
+``` 
+and then activate the virtual environment: <br>
+run into the terminal: 
+at Windows: <br> 
+```venv\Scripts\activate
+``` 
+the next command: <br> 
+```pip install -r requirements.txt
+```
+than: <br> 
+```python run.py
+```
+the server will start at :
+http://localhost:5000
+
+## How to run the project - frontend: 
+run the following commands: <br>
+into the frontend folder: <br>
+```npm install
+```
+than: <br>
+```npm run dev
+than the frontend will start at :
+http://localhost:5173
+
+
 
 # STRUCTURE
 runi-social-media-app/
