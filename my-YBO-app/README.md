@@ -22,9 +22,58 @@ Currently, two official plugins are available:
 ```
 3. Open your browser and navigate to `http://localhost:5173` to see the application running.
 
-## React Compiler
+# React Compiler
 The React Compiler is not enabled on this template because of its impact on dev & build performances.<br>
 To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+# Project Structure
+
+my-YBO-app/
+  │
+  ├── index.html
+  ├── package.json
+  ├── README.md
+  │
+  ├── client / 
+  │   │
+  │   └── README.md
+  │  
+  ├── server / 
+  │   │
+  │   ├── server.js
+  │   │
+  │   ├── db/
+  │   │  └── db.js
+  │   │
+  │   └── routes/
+  │       └── authRoutes.js
+  │       
+  └──  src / 
+     │
+     ├── App.jsx
+     ├── App.css
+     ├── main.jsx
+     ├── index.css
+     │
+     ├── api /
+     │  └── api.js
+     │
+     ├── components /
+     │  ├── Feed.jsx
+     │  ├── Login.jsx
+     │  ├── NewPost.jsx
+     │  ├── Search.jsx
+     │  ├── Signup.jsx
+     │  ├── SinglePost.jsx
+     │  ├── ToolbarComponent.jsx
+     │  ├── User.jsx
+     │  └──  Users.jsx  
+     │
+     └── auth /
+         ├── AuthContext.jsx
+         └──  ProtectedRoute.jsx
+
+
 
 <!-- 
 ## Live Demo

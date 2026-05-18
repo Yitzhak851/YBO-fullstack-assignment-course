@@ -1,17 +1,44 @@
-import axios from "axios";
+const BASE_URL = "https://jsonplaceholder.typicode.com";
 
-const api = axios.create({
-  baseURL: "http://localhost:5000/api"
-});
+export async function fetchPosts(start = 0, limit = 10, userId = null) {
+  const userParam = userId ? `&userId=${userId}` : "";
+  const response = await fetch(
+    `${BASE_URL}/posts?_start=${start}&_limit=${limit}${userParam}`
+  );
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  if (!response.ok) {
+    throw new Error("Failed to fetch posts");
   }
 
-  return config;
-});
+  return response.json();
+}
 
-export default api;
+export async function fetchUsers(start = 0, limit = 10, search = "") {
+  const response = await fetch(`${BASE_URL}/users`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch users");
+  }
+
+  const users = await response.json();
+
+  return users
+    .filter((user) =>
+      user.email.toLowerCase().includes(search.toLowerCase())
+    )
+    .slice(start, start + limit);
+}
+
+// TODO: Replace with real API calls when backend is ready
+// import axios from "axios";
+// const api = axios.create({
+//   baseURL: "http://localhost:5000/api"
+// });
+// api.interceptors.request.use((config) => {
+//   const token = localStorage.getItem("token");
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+//   return config;
+// });
+// export default api;

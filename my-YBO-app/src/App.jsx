@@ -20,6 +20,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/new-post" element={<ProtectedRoute> <NewPost /> </ProtectedRoute>} />
       </Routes>
+      
     </BrowserRouter>
   );
 }
