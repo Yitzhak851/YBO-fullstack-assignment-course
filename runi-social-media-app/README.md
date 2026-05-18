@@ -1,8 +1,8 @@
 <!-- THE FINAL PROJECT FOLDER -->
-
 # This folder contain my FINAL PROJECT for course 3172
 
-# Hot to run the project:
+# How to run the project:
+
 ## How to run the project - backend: 
 After cloning the repository, navigate to the project folder and follow these steps: <br>
 into the backend folder: <br>
@@ -24,13 +24,13 @@ the server will start at :
 http://localhost:5000
 
 ## How to run the project - frontend: 
-run the following commands: <br>
-into the frontend folder: <br>
-```npm install
-```
-than: <br>
-```npm run dev
-than the frontend will start at :
+(1) run the following commands into the frontend folder: <br>
+    ```npm install
+    ```
+(2) run the following command: <br>
+    ```npm run dev
+    ```
+(3) than the frontend will start at : <br>
 http://localhost:5173
 
 

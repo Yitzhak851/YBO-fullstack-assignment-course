@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { useParams } from "react-router-dom";
 import SinglePost from "./SinglePost";
-import { fetchPosts } from "../api/api";
+import { fetchPosts } from "../api/api.js";
 
 function Feed() {
   const { userId } = useParams();

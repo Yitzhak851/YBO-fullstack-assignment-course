@@ -1,7 +1,11 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+// App.jsx - runi-social-media-app
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import Feed from "./components/Feed";
+import LoginPage from "./pages/LoginPage";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
-import LoginPage from "./pages/LoginPage";
+
 import RegisterPage from "./pages/RegisterPage";
 import FeedPage from "./pages/FeedPage";
 import CreatePostPage from "./pages/CreatePostPage";
@@ -10,7 +14,7 @@ import ProfilePage from "./pages/ProfilePage";
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <main className="page-container">
         
