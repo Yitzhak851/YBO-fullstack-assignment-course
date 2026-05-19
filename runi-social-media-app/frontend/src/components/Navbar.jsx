@@ -26,8 +26,19 @@ function Navbar() {
           </>
         ) : (
           <>
+            <Link to="/">Home</Link>
+            <Link to="/search">Search</Link>
+            <Link to="/explore">Explore</Link>
+
             <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>
+
+            {/* <Link to="/feed">Feed</Link>
+            <Link to="/create-post">Create Post</Link>
+            <Link to={`/profile/${user.id}`}>My Profile</Link>
+            <button onClick={handleLogout}>Logout</button> */}
+            
+            
           </>
         )}
       </div>

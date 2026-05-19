@@ -13,7 +13,7 @@ function ToolbarComponent() {
         </Typography>
 
         {isLoggedIn && (
-          <Button variant="contained" color="warning" component={Link} to="/new-post">
+          <Button variant="contained" color="warning" component={Link} to="/create-post">
             + New Post
           </Button>
         )}
@@ -22,8 +22,10 @@ function ToolbarComponent() {
 
         <Box>
           <Button color="inherit" component={Link} to="/">Home</Button>
-          <Button color="inherit" component={Link} to="/users">Users</Button>
-          <Button color="inherit" component={Link} to="/about">About</Button>
+          <Button color="inherit" component={Link} to="/explore">Explore</Button>
+          <Button color="inherit" component={Link} to="/profile">Profile</Button>
+          <Button color="inherit" component={Link} to="/login">Login</Button>
+          <Button color="inherit" component={Link} to="/register">Register</Button>
 
           {isLoggedIn ? (
             <>
