@@ -6,8 +6,8 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-# Some Few mission TODO for me. <br>
-Last Update: 11/05/26
+# Some Few mission TODO for me
+- [x] Last Update: 11/05/26
 1. Make Live demo for the project.
 2. Add React Compiler to the project.
 3. Make sure that the last commit works well by the HW-05 instructions and the project can be run without any error.
