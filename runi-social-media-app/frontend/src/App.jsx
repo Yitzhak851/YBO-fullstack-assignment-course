@@ -50,7 +50,7 @@ function App() {
           <Route path="/feed" element={<ProtectedRoute><FeedPage /></ProtectedRoute>} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+          <Route path="/profile/:id" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/register" element={<RegisterPage />} />
           
           {/* Component Routes */}

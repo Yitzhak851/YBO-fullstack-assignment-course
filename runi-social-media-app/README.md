@@ -7,19 +7,23 @@
 After cloning the repository, navigate to the project folder and follow these steps: <br>
 into the backend folder: <br>
 run the following commands: <br>
+
 ```text
 python -m venv venv
 ``` 
+
 and then activate the virtual environment: <br>
-run into the terminal: 
-at Windows: <br> 
+run into the terminal at Windows: <br> 
+
 ```text
 venv\Scripts\activate
 ``` 
+
 the next command: <br> 
 ```text
 pip install -r requirements.txt
 ```
+
 than: <br> 
 ```text
 python run.py
@@ -31,11 +35,9 @@ http://localhost:5000
 (1) run the following commands into the frontend folder: <br>
     ```npm install
     ```
-
 (2) run the following command: <br>
     ```npm run dev
     ```
-
 (3) than the frontend will start at : <br>
 http://localhost:5173
 

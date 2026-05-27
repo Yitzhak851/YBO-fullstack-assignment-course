@@ -1,34 +1,12 @@
 # HW3 && HW4 : React + Vite Template
-
-## HW3 : Add Home-page/Feed to my blog
-At this assignment we need to create a home page for our blog, which will display a feed of posts from all users. The feed should show the title, email, and a preview of the post content (first 3 lines). Users should be able to click on a "Read more" button to expand the full text of the post. We will use Material UI (MUI) components to design the layout and styling of the feed.
-1. Create new React project
-2. Install Material UI
-3. Create Top_Bar_Component:
-     a. AppName on the left
-     b. Menu buttons on the right
-     c. use MUI AppBar and Toolbar to design
-4. Create Single_Post_Componenty:
-     a. Display title, email and first 3 lines
-     b. Button Read more - should expand full text
-     c. use MUI Card to design
-5. Create api.js
-     a. implement function to fetch posts
-6. Create Feed_Component:
-     a. at the start fetches 10 posts from all users and display them
-     b. Load more - should fetch and display next 10 posts
-     c. Display spinner when in progress
-     d. use MUI Grid and Progress to design
 Note:
 At this assignment it should takes data from real backend. not from jsonplaceholder.
 
+## HW3 : Add Home-page/Feed to my blog
+... (to be added)
+
 ## HW4 : 
-This assignment focuses on setting up a React application using Vite, a modern build tool that provides fast development and optimized production builds. The template includes essential configurations for React development, including support for JSX, HMR (Hot Module Replacement), and ESLint rules to ensure code quality.
-We use templates to provide a starting point for your React application.
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-Currently, two official plugins are available:
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+... (to be added)
 
 # Some Few mission TODO for me
 - [x] Last Update: 11/05/26
