@@ -13,9 +13,7 @@ Currently, two official plugins are available:
 3. Make sure that the last commit works well by the HW-05 instructions and the project can be run without any error.
 
 # How to Run the Application
-1. Install dependencies: 
-'''`pip install npm install`
-'''
+1. Install dependencies: `pip install npm install`
 2. Start the development server:
 `npm run dev`
 3. Open your browser and navigate to `http://localhost:5173` <br>
