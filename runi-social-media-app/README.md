@@ -15,25 +15,21 @@ at Windows: <br>
 ```venv\Scripts\activate
 ``` 
 the next command: <br> 
-```text
-pip install -r requirements.txt
+```pip install -r requirements.txt
 ```
 than: <br> 
-```text
-python run.py
+```python run.py
 ```
-the server will start at :
+the server will start at : <br>
 http://localhost:5000
 
 ## How to run the project - frontend: 
 (1) run the following commands into the frontend folder: <br>
-    ```text
-    npm install
+    ```npm install
     ```
 
 (2) run the following command: <br>
-    ```text
-    npm run dev
+    ```npm run dev
     ```
 
 (3) than the frontend will start at : <br>
