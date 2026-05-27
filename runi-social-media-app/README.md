@@ -7,18 +7,22 @@
 After cloning the repository, navigate to the project folder and follow these steps: <br>
 into the backend folder: <br>
 run the following commands: <br>
-```python -m venv venv
+```text
+python -m venv venv
 ``` 
 and then activate the virtual environment: <br>
 run into the terminal: 
 at Windows: <br> 
-```venv\Scripts\activate
+```text
+venv\Scripts\activate
 ``` 
 the next command: <br> 
-```pip install -r requirements.txt
+```text
+pip install -r requirements.txt
 ```
 than: <br> 
-```python run.py
+```text
+python run.py
 ```
 the server will start at : <br>
 http://localhost:5000
