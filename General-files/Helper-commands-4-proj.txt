@@ -5,3 +5,66 @@
 # Comands for see my tree of my files at some PROJECT
 find .
 tree
+
+==========================================================
+Commands that check if  Node.js  installed at my computer
+==========================================================
+node -v
+npm -v
+User@YBO-PC MINGW64 ~/my-YBO-app (main)
+$ node -v
+v24.15.0
+User@YBO-PC MINGW64 ~/my-YBO-app (main)
+$ npm -v
+11.12.1
+
+==========================================================
+Commands that check if  MySQL  installed at my computer
+==========================================================
+mysql --version
+User@YBO-PC MINGW64 ~/my-YBO-app (main)
+$ mysql --version
+C:\Program Files\MySQL\MySQL 
+Server 9.7\bin\mysql.exe  
+Ver 9.7.0 for Win64 on x86_64 (MySQL Community Server - GPL)
+
+mysql -u root -p
+
+mysql: Unknown OS character set 'cp862'.
+mysql: Switching to the default character set 'utf8mb4'.
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 9.7.0 MySQL Community Server - GPL
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+SHOW DATABASES;
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| blog_db            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| social_app         |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.542 sec)
+
+mysql> USE blog_db;
+Database changed
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_blog_db |
++-------------------+
+| posts             |
+| users             |
++-------------------+
+2 rows in set (0.160 sec)

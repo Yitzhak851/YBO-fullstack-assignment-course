@@ -1,4 +1,4 @@
-# HW-03 + HW-04: React + Vite Template
+# HW_03 && HW_04 : React + Vite Template
 This assignment focuses on setting up a React application using Vite, a modern build tool that provides fast development and optimized production builds. The template includes essential configurations for React development, including support for JSX, HMR (Hot Module Replacement), and ESLint rules to ensure code quality.
 We use templates to provide a starting point for your React application.
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -13,18 +13,18 @@ Currently, two official plugins are available:
 3. Make sure that the last commit works well by the HW-05 instructions and the project can be run without any error.
 
 # How to Run the Application
-1. Install dependencies: `pip install npm install`
-2. Start the development server:
-`npm run dev`
-3. Open your browser and navigate to `http://localhost:5173` <br>
-to see the application running.
+1. Install dependencies: <br>
+`npm install` <br>
 
-# React Compiler
-The React Compiler is not enabled on this template because of its impact on dev & build performances.<br>
-To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Run Backend (the development server): <br>
+`npm run dev`
+
+3. Open your browser and navigate to <br>
+`http://localhost:5173` <br>
+to see the application running. <br>
 
 # Project Structure
-
+```text
 my-YBO-app/
   │
   ├── index.html
@@ -69,12 +69,4 @@ my-YBO-app/
      └── auth /
          ├── AuthContext.jsx
          └──  ProtectedRoute.jsx
-
-
-
-<!-- 
-## Live Demo
-You can view the live project here:
-[Click here to open the app](https://ybo-fullstack-assignment-course-q4do-lqoluiech.vercel.app) -->
-<!-- ## Expanding the ESLint configuration
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project. -->
+```
