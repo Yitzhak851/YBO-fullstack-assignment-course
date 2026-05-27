@@ -15,27 +15,34 @@ at Windows: <br>
 ```venv\Scripts\activate
 ``` 
 the next command: <br> 
-```pip install -r requirements.txt
+```text
+pip install -r requirements.txt
 ```
 than: <br> 
-```python run.py
+```text
+python run.py
 ```
 the server will start at :
 http://localhost:5000
 
 ## How to run the project - frontend: 
 (1) run the following commands into the frontend folder: <br>
-    ```npm install
+    ```text
+    npm install
     ```
+
 (2) run the following command: <br>
-    ```npm run dev
+    ```text
+    npm run dev
     ```
+
 (3) than the frontend will start at : <br>
 http://localhost:5173
 
-<!-- TODO : male sure my up work -->
+<!-- TODO : make sure my up work -->
 
 # STRUCTURE
+```text
 runi-social-media-app/
 │
 ├── README.md
@@ -156,3 +163,4 @@ runi-social-media-app/
 │   └── frontend/
 │
 └── deployment/
+```
