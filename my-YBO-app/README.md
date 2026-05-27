@@ -14,8 +14,7 @@ Currently, two official plugins are available:
 
 # How to Run the Application
 1. Install dependencies: 
-'''
-`pip install npm install` 
+'''`pip install npm install`
 '''
 2. Start the development server:
 `npm run dev`
