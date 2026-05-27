@@ -19,6 +19,14 @@ $ npm -v
 11.12.1
 
 ==========================================================
+Every time if i try to run my project i have to :
+==========================================================
+1. Make sure that MySQL work 
+2. run *Backend* from /server 
+3. run *Frontend* from /my-YBO-app
+4. open localhost:5173
+
+==========================================================
 Commands that check if  MySQL  installed at my computer
 ==========================================================
 mysql --version
@@ -42,7 +50,7 @@ affiliates. Other names may be trademarks of their respective
 owners.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-SHOW DATABASES;
+>>> SHOW DATABASES;
 mysql> SHOW DATABASES;
 +--------------------+
 | Database           |
@@ -58,7 +66,8 @@ mysql> SHOW DATABASES;
 +--------------------+
 8 rows in set (0.542 sec)
 
-mysql> USE blog_db;
+mysql> 
+>>> USE blog_db;  USE social_app;
 Database changed
 mysql> SHOW TABLES;
 +-------------------+
@@ -68,3 +77,44 @@ mysql> SHOW TABLES;
 | users             |
 +-------------------+
 2 rows in set (0.160 sec)
+
+USE social_app;
+mysql> SHOW TABLES;   
++----------------------+
+| Tables_in_social_app |
++----------------------+
+| users                |
++----------------------+
+1 row in set (0.033 sec)
+
+USE social_app;
+mysql> SHOW DATABASES;
+
+USE social_app;
+INSERT INTO users (email, password)
+VALUES
+('user_a@runi_example.com', 'Aa12'),
+('user_b@runi_example.com', 'Bb12'),
+('user_c@runi_example.com', 'Cc12'),
+('user_d@runi_example.com', 'Dd12'),
+('user_e@runi_example.com', 'Ee12');
+
+INSERT INTO posts (user_id, title, body)
+VALUES
+(1, 'Second user post', 'This post was created by user number 1 in the local MySQL database.'),
+(3, 'Third user post', 'This post was created by user number 3 in the local MySQL database.'),
+(4, 'Fourth user post', 'This post was created by user number 4 in the local MySQL database.'),
+(5, 'Fifth user post', 'This post was created by user number 5 in the local MySQL database.'),
+(6, 'Sixth user post', 'This post was created by user number 6 in the local MySQL database.'),
+(7, 'Seventh user post', 'This post was created by user number 7 in the local MySQL database.');
+
+DELETE FROM users
+WHERE id = 2;
+
+
+USE social_app;
+UPDATE users
+SET email = 'user_a@runi.com'
+WHERE id = 3;
+
+SELECT id, email FROM users;

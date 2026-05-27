@@ -9,8 +9,8 @@ The purpose of this repository is to :<br>
 Almost every week, I will be posting my homework assignments here, which include various projects and exercises designed to enhance my skills in full stack development. <br>
 - [x] HW1: Building a simple Flask web application <br>
 - [x] HW2: Creating RESTful APIs with Flask <br>
-- [ ] HW3: Frontend development with HTML, CSS, and JavaScript <br>
-- [ ] HW4: Database integration and SQL queries <br>
+- [x] HW3: Frontend development with HTML, CSS, and JavaScript <br>
+- [x] HW4: Database integration and SQL queries <br>
 - [ ] HW5: Deploying a full stack application <br>
 
 

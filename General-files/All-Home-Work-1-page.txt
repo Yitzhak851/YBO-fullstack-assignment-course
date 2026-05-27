@@ -41,7 +41,7 @@ And use these free APIs for this task:
            ○ search for user profiles
 
 =================================================================================================================================================
-(HW-03) : Add 'Home page' / 'Feed' to my blog | Path : ~/YBO-fullstack-assignment-course/my-YBO-app
+(HW-03) : Add Home-page/Feed to my blog | Path : ~/YBO-fullstack-assignment-course/my-YBO-app
 =================================================================================================================================================
 1. Create new React project
 2. Install Material UI
