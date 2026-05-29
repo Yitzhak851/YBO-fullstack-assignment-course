@@ -26,4 +26,4 @@ Thumbs.db
 *.local
 
 # Files NOT_TO_COMMIT
-/GeneratedFiles/
+/General-files/
