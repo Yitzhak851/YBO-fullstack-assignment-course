@@ -64,9 +64,7 @@ function Users() {
         {loading ? (
           <CircularProgress />
         ) : (
-          <Button variant="contained" onClick={() => loadUsers(false)}>
-            Load More
-          </Button>
+          <Button variant="contained" onClick={() => loadUsers(false)}> Load More </Button>
         )}
       </Box>
     </Container>
