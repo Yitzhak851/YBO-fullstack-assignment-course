@@ -1,6 +1,10 @@
+// This file contains the routes for user authentication (signup and login)
+
+// Import necessary modules
 const express = require("express");
 const bcrypt = require("bcrypt");
 
+// Import database connection
 const db = require("../db/db");
 const router = express.Router();
 
@@ -81,6 +85,22 @@ router.post("/login", (req, res) => {
         email: user.email,
       },
     });
+  });
+});
+
+router.get("/me", (req, res) => {
+  // This route can be used to get the current logged-in user's info
+  // In a real application, you would check the user's session or token here
+  res.json({
+    message: "This is a protected route",
+  });
+});
+
+router.get("/login", (req, res) => {
+  // This route can be used to check if the user is logged in
+  // In a real application, you would check the user's session or token here
+  res.json({
+    message: "This is a protected route",
   });
 });
 

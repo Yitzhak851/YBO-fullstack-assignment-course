@@ -28,7 +28,6 @@ function App() {
         <Route path="/user/:userId" element={<User />} />
         <Route path="/users" element={<Users />} />
         {/* <Route path="/user-posts/:userId" element={<Feed />} /> */}
-        
       </Routes>
       
     </BrowserRouter>
