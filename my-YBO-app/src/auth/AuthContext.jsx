@@ -20,19 +20,8 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("currentUser");
     setCurrentUser(null);
   }
-
-  const value = {
-    currentUser,
-    isLoggedIn: Boolean(currentUser),
-    login,
-    logout,
-  };
-
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const value = { currentUser, isLoggedIn: Boolean(currentUser), login, logout, };
+  return ( <AuthContext.Provider value={value}> {children} </AuthContext.Provider> );
 }
 
 export function useAuth() {

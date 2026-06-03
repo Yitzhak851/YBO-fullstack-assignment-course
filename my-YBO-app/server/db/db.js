@@ -1,28 +1,30 @@
-// This file sets up the connection to the MySQL database 
-// By using the mysql2 library
+// my-YBO-app/db/db.js - Sets up the connection to the MySQL database using mysql2 library
+// This file sets up the connection to the MySQL database
+// By using the mysql2 library with Promise support
 
-// Import the mysql2 library
-const mysql = require("mysql2");
+const mysql = require("mysql2/promise");
 
-// Create a connection to the MySQL database
-const connection = mysql.createConnection({
+const db = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "X0f2qq64g@@",
   database: "social_app",
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
-// Connect to the database and handle any connection errors
-connection.connect((err) => {
-  // if the connect fasiled, log an error message and the error details
-  if (err) {
+async function testConnection() {
+  try {
+    const connection = await db.getConnection();
+    console.log("Connected to MySQL");
+    connection.release();
+  } catch (err) {
     console.log("Database connection failed");
     console.log(err);
-    return;
   }
-  // If the connection is successful, log a success message
-  console.log("Connected to MySQL");
-});
+}
 
-// Export the connection object for use in other parts of the application
-module.exports = connection;
+testConnection();
+
+module.exports = db;

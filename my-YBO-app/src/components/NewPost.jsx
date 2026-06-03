@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, CardContent, Container, TextField, Typography, } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { createPost } from "../api/api";

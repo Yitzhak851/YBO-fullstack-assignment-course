@@ -1,34 +1,29 @@
-import { useState } from "react";
-
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Divider,
-  TextField,
-  Typography,
-} from "@mui/material";
-
+// my-YBO-app/src/components/Login.jsx - This component renders a login form and handles user authentication by sending a POST request to the backend server.
+import { useState } from "react";  // React hook for managing state in functional components
+import { Box, Button, Card, CardContent, Divider, TextField, Typography, } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-
 import { useAuth } from "../auth/AuthContext";
 
+// This component renders a login form and handles user authentication by sending a POST request to the backend server. 
+// It also displays any error messages that occur during the login process. Upon successful login, it redirects the user to the home page.
 function Login() {
+  // Initialize state and hooks
   const navigate = useNavigate();
-
   const { login } = useAuth();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
+      
+    // console.log("STEP 1");
 
     setError("");
-
     try {
+      
+      // console.log("STEP 2");
+
       const response = await fetch(
         "http://localhost:5000/api/auth/login",
         {
@@ -42,106 +37,52 @@ function Login() {
           }),
         }
       );
-
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.error || "Login failed");
       }
-
       login(data.user);
-
       navigate("/");
-    } catch (err) {
+    } 
+    catch (err) 
+    {
       setError(err.message);
     }
+    // console.log("STEP 3");
+    
+    const data = await response.json();
+
+    // console.log("STEP 4", data);
   }
 
   return (
-    <Box
-      sx={{
-        minHeight: "80vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Box sx={{ minHeight: "80vh", display: "flex", justifyContent: "center", alignItems: "center", }}>
       <Card sx={{ width: 350, p: 2 }}>
         <CardContent>
-          <Typography
-            variant="h5"
-            fontWeight="bold"
-            align="center"
-          >
-            Welcome Back
-          </Typography>
-
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            align="center"
-            sx={{ mb: 4 }}
-          >
-            Sign in to your account
-          </Typography>
-
-          <form onSubmit={handleSubmit}>
-            <TextField
-              fullWidth
-              label="Email"
-              margin="normal"
-              value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
-            />
-
-            <TextField
-              fullWidth
-              label="Password"
-              type="password"
-              margin="normal"
-              value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
-            />
-
-            {error && (
-              <Typography
-                color="error"
-                sx={{ mt: 2 }}
-              >
-                {error}
-              </Typography>
-            )}
-
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3 }}
-              type="submit"
-            >
-              Login
-            </Button>
+          <Typography variant="h5" fontWeight="bold" align="center"> Welcome Back </Typography>
+          <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 4 }}> Sign in to your account </Typography>
+          {/* =========  Form =========  */}
+          <form onSubmit={handleSubmit}> 
+            {/* =========  Text Fields =========  */}
+            {/* =================================================== Email Button ======================================= */}
+            <TextField fullWidth label="Email" margin="normal" value={email} onChange={(e) => setEmail(e.target.value) } slotProps={{ htmlInput: { "data-cy": "email", }, }} />
+            <TextField fullWidth label="Password" type="password" margin="normal" value={password} onChange={(e) => setPassword(e.target.value) } slotProps={{ htmlInput: { "data-cy": "password", }, }} />
+            {/* =========  Error Message =========  */}
+            {error && (<Typography color="error" sx={{ mt: 2 }}> {error} </Typography>)}
+            
+            {/* =========  Submit Button =========  */}
+            {/* =================================================== Login Button ======================================= */}
+            <Button fullWidth variant="contained" sx={{ mt: 3 }} type="submit" data-cy="login-btn" > Login </Button>
           </form>
-
-          <Divider sx={{ my: 3 }}>
-            OR
-          </Divider>
-
-          <Button
-            fullWidth
-            variant="outlined"
-            component={Link}
-            to="/signup"
-          >
-            Sign Up
-          </Button>
+          <Divider sx={{ my: 3 }}> OR </Divider>
+          {/* =========  Sign Up Button =========  */}
+          <Button fullWidth variant="outlined" component={Link} to="/signup" data-cy="signup-btn" > Sign Up </Button>
         </CardContent>
+
       </Card>
     </Box>
   );
 }
 
+// renders a login form and handles user authentication by sending a POST request to the backend server. 
 export default Login;

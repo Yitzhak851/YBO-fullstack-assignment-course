@@ -1,11 +1,14 @@
-# HW3 && HW4 : React + Vite Template
-Note:
-At this assignment it should takes data from real backend. not from jsonplaceholder.
+# My YBO Blog Application
+This is a simple blog application built using React for the frontend and Node.js <br>
+With 'Express' technology for the backend. <br>
+The application allows users to create, view, and manage blog posts. <br>
+Users can sign up, log in, and create new posts. <br>
+The application also includes a feed page where users can see all the posts. <br>
 
-## HW3 : Add Home-page/Feed to my blog
+## Step-by-step : HW3 : Add Home-page/Feed to my blog
 ... (to be added)
 
-## HW4 : 
+## Step-by-step : HW4 : 
 ... (to be added)
 
 # Some Few mission TODO for me
@@ -37,31 +40,19 @@ my-YBO-app/
   ├── index.html
   ├── package.json
   ├── README.md
-  │
-  ├── client / 
-  │   │
-  │   └── README.md
-  │  
   ├── server / 
-  │   │
   │   ├── server.js
-  │   │
   │   ├── db/
   │   │  └── db.js
-  │   │
   │   └── routes/
   │       └── authRoutes.js
-  │       
   └──  src / 
-     │
      ├── App.jsx
      ├── App.css
      ├── main.jsx
      ├── index.css
-     │
      ├── api /
      │  └── api.js
-     │
      ├── components /
      │  ├── Feed.jsx
      │  ├── Login.jsx
@@ -72,7 +63,6 @@ my-YBO-app/
      │  ├── ToolbarComponent.jsx
      │  ├── User.jsx
      │  └──  Users.jsx  
-     │
      └── auth /
          ├── AuthContext.jsx
          └──  ProtectedRoute.jsx

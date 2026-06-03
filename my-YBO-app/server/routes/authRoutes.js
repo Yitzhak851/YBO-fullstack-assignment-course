@@ -1,45 +1,60 @@
 // This file contains the routes for user authentication (signup and login)
-
-// Import necessary modules
-const express = require("express");
-const bcrypt = require("bcrypt");
+const express = require("express");  // declare express to create the router and handle HTTP requests
+const bcrypt = require("bcrypt");   // use bcrypt library ==> for hashing passwords
 
 // Import database connection
 const db = require("../db/db");
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
-  // Declare input validation
-  const { email, password } = req.body;
-  // Validate email format
+  const { email, password, name } = req.body;
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  // Check email format
+
   if (!emailRegex.test(email)) {
     return res.status(400).json({
       error: "Invalid email format",
     });
-  // TODO : maybi letter to check pasword length and complexity
-  } 
+  }
+
   try {
-    // Hash the password before storing
     const hashedPassword = await bcrypt.hash(password, 10);
-    // Insert user into database
-    const sql = "INSERT INTO users (email, password) VALUES (?, ?)";
-    // Use parameterized query to prevent SQL injection
+
+    const displayName = name || email.split("@")[0];
+
+    const profilePicture =
+      `https://api.dicebear.com/9.x/adventurer/svg?seed=${encodeURIComponent(displayName)}`;
+
+    const sql = `
+      INSERT INTO users 
+      (email, password, name, bio, profile_picture) 
+      VALUES (?, ?, ?, ?, ?)
+    `;
+
     db.query(
       sql,
-      [email, hashedPassword],
+      [
+        email,
+        hashedPassword,
+        displayName,
+        "New user",
+        profilePicture,
+      ],
       (err, result) => {
         if (err) {
           return res.status(500).json({
             error: err.message,
           });
         }
+
         res.status(201).json({
           message: "User created",
           user: {
             id: result.insertId,
             email,
+            name: displayName,
+            bio: "New user",
+            profile_picture: profilePicture,
           },
         });
       }
@@ -52,10 +67,8 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  // Declare input validation
-  const { email, password, repeatPassword } = req.body;
-  // Use parameterized query to prevent SQL injection
-  const sql = "SELECT * FROM users WHERE email = ?"; 
+  const { email, password, repeatPassword } = req.body;  // Declare input validation
+  const sql = "SELECT * FROM users WHERE email = ?";   // Use parameterized query to prevent SQL injection
   // Check if user exists and validate password
   db.query(sql, [email], async (err, results) => {
     if (err) {
@@ -88,20 +101,8 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.get("/me", (req, res) => {
-  // This route can be used to get the current logged-in user's info
-  // In a real application, you would check the user's session or token here
-  res.json({
-    message: "This is a protected route",
-  });
-});
-
 router.get("/login", (req, res) => {
-  // This route can be used to check if the user is logged in
-  // In a real application, you would check the user's session or token here
-  res.json({
-    message: "This is a protected route",
-  });
+  res.json({ message: "This is a protected route", });
 });
 
 module.exports = router;

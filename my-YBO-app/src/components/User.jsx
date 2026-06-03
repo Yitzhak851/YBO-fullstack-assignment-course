@@ -1,7 +1,9 @@
 import { Button, TableCell, TableRow } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
+
 function User({ user }) {
+  // variable navigate is used to programmatically navigate to different routes in the application when the user clicks the "See Posts" button.
   const navigate = useNavigate();
 
   return (
@@ -9,13 +11,7 @@ function User({ user }) {
       <TableCell>{user.email}</TableCell>
       <TableCell>{user.id}</TableCell>
       <TableCell>
-        <Button
-          variant="contained"
-          size="small"
-          onClick={() => navigate(`/user-posts/${user.id}`)}
-        >
-          See Posts
-        </Button>
+        <Button variant="contained" size="small" onClick={() => navigate(`/users/${user.id}`) }> View Profile </Button>
       </TableCell>
     </TableRow>
   );

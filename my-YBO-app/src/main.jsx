@@ -1,9 +1,10 @@
 // This file turn-on the Fronted
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { AuthProvider } from "./auth/AuthContext.jsx";
+
 import App from "./App.jsx";
 import "./index.css";
-import { AuthProvider } from "./auth/AuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
