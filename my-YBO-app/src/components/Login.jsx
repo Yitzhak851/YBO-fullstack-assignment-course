@@ -17,14 +17,14 @@ function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
       
-    // console.log("STEP 1");
+    console.log("STEP 1");
 
     setError("");
     try {
       
-      // console.log("STEP 2");
+      console.log("STEP 2");
 
-      const response = await fetch(
+      fetch(
         "http://localhost:5000/api/auth/login",
         {
           method: "POST",
@@ -36,7 +36,14 @@ function Login() {
             password,
           }),
         }
-      );
+      ).then((response) => {
+        coonsole.log("STEP 2.5", response);
+        return response.json();
+      }).catch((err) => {
+        console.log("STEP 2.6", err);
+        throw err;
+      });
+
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.error || "Login failed");
@@ -46,13 +53,14 @@ function Login() {
     } 
     catch (err) 
     {
+      console.log("STEP X");
       setError(err.message);
     }
-    // console.log("STEP 3");
+    console.log("STEP 3");
     
     const data = await response.json();
 
-    // console.log("STEP 4", data);
+    console.log("STEP 4", data);
   }
 
   return (
