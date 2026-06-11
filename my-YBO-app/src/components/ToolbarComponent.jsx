@@ -21,10 +21,10 @@ function ToolbarComponent() {
         {isLoggedIn && (<Button variant="contained" color="warning" component={Link} to="/new-post"> + New Post </Button>)}
         <Box sx={{ flexGrow: 1 }} />
         <Box>
-          {/* =================  Home + Users Button ======================  */} 
+          {/* =================  Home + Users + Login Button ======================  */} 
           <Button color="inherit" component={Link} to="/"> Home </Button>
           <Button color="inherit" component={Link} to="/users"> Users </Button>
-
+    
           {isLoggedIn ? (
             <> <Typography component="span" sx={{ mx: 2 }}> {currentUser.email} </Typography>
               {/* =================  Logout Button ======================  */} 

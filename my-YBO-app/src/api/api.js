@@ -15,6 +15,18 @@ export async function fetchPosts(start = 0, limit = 10, userId = null) {
   return response.json();
 }
 
+// export async function fetchPosts(start = 0, limit = 10, userId) {
+//   let url = `http://localhost:5000/api/posts?start=${start}&limit=${limit}`;
+//   if (userId) {
+//     url += `&userId=${userId}`;
+//   }
+//   const response = await fetch(url);
+//   if (!response.ok) {
+//     throw new Error("Failed to fetch posts");
+//   }
+//   return await response.json();
+// }
+
 // Additional API functions can be added here, such as fetching users, creating posts, etc.
 export async function fetchUsers(start = 0, limit = 10, search = "") {
   const response = await fetch(
