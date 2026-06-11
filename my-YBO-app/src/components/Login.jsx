@@ -39,10 +39,10 @@ function Login() {
       ).then((response) => {
         coonsole.log("STEP 2.5", response);
         return response.json();
-      }).catch((err) => {
+      }}).catch((err) => {
         console.log("STEP 2.6", err);
         throw err;
-      });
+      }
 
       const data = await response.json();
       if (!response.ok) {
