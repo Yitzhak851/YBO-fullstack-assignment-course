@@ -14,82 +14,57 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  // async function handleSubmit(e)
+  // Handles the form submission for user login. It sends a POST request to the backend server with the email and password.
+  // If the login is successful, it calls the login function from the AuthContext and redirects the user to the home page. If there is an error during the login process, it sets the error message to be displayed to the user.
   async function handleSubmit(e) {
     e.preventDefault();
-      
-    console.log("STEP 1");
-
     setError("");
     try {
-      
-      console.log("STEP 2");
-
-      fetch(
-        "http://localhost:5000/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      ).then((response) => {
-        coonsole.log("STEP 2.5", response);
-        return response.json();
-      }}).catch((err) => {
-        console.log("STEP 2.6", err);
-        throw err;
-      }
-
-      const data = await response.json();
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
       if (!response.ok) {
-        throw new Error(data.error || "Login failed");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Login failed");
       }
-      login(data.user);
+      const data = await response.json();
+      login(data.token);
       navigate("/");
-    } 
-    catch (err) 
-    {
-      console.log("STEP X");
+    } catch (err) {
       setError(err.message);
     }
-    console.log("STEP 3");
-    
-    const data = await response.json();
-
-    console.log("STEP 4", data);
   }
 
-  return (
-    <Box sx={{ minHeight: "80vh", display: "flex", justifyContent: "center", alignItems: "center", }}>
-      <Card sx={{ width: 350, p: 2 }}>
-        <CardContent>
-          <Typography variant="h5" fontWeight="bold" align="center"> Welcome Back </Typography>
-          <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 4 }}> Sign in to your account </Typography>
-          {/* =========  Form =========  */}
-          <form onSubmit={handleSubmit}> 
-            {/* =========  Text Fields =========  */}
-            {/* =================================================== Email Button ======================================= */}
-            <TextField fullWidth label="Email" margin="normal" value={email} onChange={(e) => setEmail(e.target.value) } slotProps={{ htmlInput: { "data-cy": "email", }, }} />
-            <TextField fullWidth label="Password" type="password" margin="normal" value={password} onChange={(e) => setPassword(e.target.value) } slotProps={{ htmlInput: { "data-cy": "password", }, }} />
-            {/* =========  Error Message =========  */}
-            {error && (<Typography color="error" sx={{ mt: 2 }}> {error} </Typography>)}
-            
-            {/* =========  Submit Button =========  */}
-            {/* =================================================== Login Button ======================================= */}
-            <Button fullWidth variant="contained" sx={{ mt: 3 }} type="submit" data-cy="login-btn" > Login </Button>
-          </form>
-          <Divider sx={{ my: 3 }}> OR </Divider>
-          {/* =========  Sign Up Button =========  */}
-          <Button fullWidth variant="outlined" component={Link} to="/signup" data-cy="signup-btn" > Sign Up </Button>
-        </CardContent>
+return (
+  <Box sx={{ minHeight: "80vh", display: "flex", justifyContent: "center", alignItems: "center", }}>
+    <Card sx={{ width: 350, p: 2 }}>
+      <CardContent>
+        <Typography variant="h5" fontWeight="bold" align="center"> Welcome Back </Typography>
+        <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 4 }}> Sign in to your account </Typography>
+        {/* =========  Form =========  */}
+        <form onSubmit={handleSubmit}>
+          {/* =========  Text Fields =========  */}
+          {/* =================================================== Email Button ======================================= */}
+          <TextField fullWidth label="Email" margin="normal" value={email} onChange={(e) => setEmail(e.target.value)} slotProps={{ htmlInput: { "data-cy": "email", }, }} />
+          <TextField fullWidth label="Password" type="password" margin="normal" value={password} onChange={(e) => setPassword(e.target.value)} slotProps={{ htmlInput: { "data-cy": "password", }, }} />
+          {/* =========  Error Message =========  */}
+          {error && (<Typography color="error" sx={{ mt: 2 }}> {error} </Typography>)}
 
-      </Card>
-    </Box>
-  );
+          {/* =========  Submit Button =========  */}
+          {/* =================================================== Login Button ======================================= */}
+          <Button fullWidth variant="contained" sx={{ mt: 3 }} type="submit" data-cy="login-btn" > Login </Button>
+        </form>
+        <Divider sx={{ my: 3 }}> OR </Divider>
+        {/* =========  Sign Up Button =========  */}
+        <Button fullWidth variant="outlined" component={Link} to="/signup" data-cy="signup-btn" > Sign Up </Button>
+      </CardContent>
+
+    </Card>
+  </Box>
+);
 }
 
 // renders a login form and handles user authentication by sending a POST request to the backend server. 
