@@ -1,3 +1,4 @@
+// my-YBO-app/server/routes/authRoutes.js - This file contains the routes for user authentication (signup and login)
 // This file contains the routes for user authentication (signup and login)
 const express = require("express");  // declare express to create the router and handle HTTP requests
 const bcrypt = require("bcrypt");   // use bcrypt library ==> for hashing passwords
@@ -66,39 +67,41 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-router.post("/login", (req, res) => {
-  const { email, password, repeatPassword } = req.body;  // Declare input validation
-  const sql = "SELECT * FROM users WHERE email = ?";   // Use parameterized query to prevent SQL injection
-  // Check if user exists and validate password
-  db.query(sql, [email], async (err, results) => {
-    if (err) {
-      return res.status(500).json({
-        error: err.message,
-      });
-    }
-    if (results.length === 0) {
-      return res.status(401).json({
-        error: "Invalid credentials",
-      });
-    }
-    const user = results[0];
-    const validPassword = await bcrypt.compare(
-      password,
-      user.password
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const [users] = await db.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
     );
-    if (!validPassword) {
-      return res.status(401).json({
-        error: "Invalid credentials",
-      });
+
+    if (users.length === 0) {
+      return res.status(401).json({ error: "Invalid credentials" });
     }
+
+    const user = users[0];
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
     res.json({
       message: "Login successful",
       user: {
         id: user.id,
         email: user.email,
+        name: user.name,
+        bio: user.bio,
+        profile_picture: user.profile_picture,
       },
     });
-  });
+  } catch (err) {
+    console.error("Login failed:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 router.get("/login", (req, res) => {

@@ -20,51 +20,54 @@ function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
+
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Login failed");
-      }
+
       const data = await response.json();
-      login(data.token);
+
+      if (!response.ok) {
+        throw new Error(data.error || "Login failed");
+      }
+
+      login(data.user);
       navigate("/");
     } catch (err) {
       setError(err.message);
     }
   }
 
-return (
-  <Box sx={{ minHeight: "80vh", display: "flex", justifyContent: "center", alignItems: "center", }}>
-    <Card sx={{ width: 350, p: 2 }}>
-      <CardContent>
-        <Typography variant="h5" fontWeight="bold" align="center"> Welcome Back </Typography>
-        <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 4 }}> Sign in to your account </Typography>
-        {/* =========  Form =========  */}
-        <form onSubmit={handleSubmit}>
-          {/* =========  Text Fields =========  */}
-          {/* =================================================== Email Button ======================================= */}
-          <TextField fullWidth label="Email" margin="normal" value={email} onChange={(e) => setEmail(e.target.value)} slotProps={{ htmlInput: { "data-cy": "email", }, }} />
-          <TextField fullWidth label="Password" type="password" margin="normal" value={password} onChange={(e) => setPassword(e.target.value)} slotProps={{ htmlInput: { "data-cy": "password", }, }} />
-          {/* =========  Error Message =========  */}
-          {error && (<Typography color="error" sx={{ mt: 2 }}> {error} </Typography>)}
+  return (
+    <Box sx={{ minHeight: "80vh", display: "flex", justifyContent: "center", alignItems: "center", }}>
+      <Card sx={{ width: 350, p: 2 }}>
+        <CardContent>
+          <Typography variant="h5" fontWeight="bold" align="center"> Welcome Back </Typography>
+          <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 4 }}> Sign in to your account </Typography>
+          {/* =========  Form =========  */}
+          <form onSubmit={handleSubmit}>
+            {/* =========  Text Fields =========  */}
+            {/* =================================================== Email Button ======================================= */}
+            <TextField fullWidth label="Email" margin="normal" value={email} onChange={(e) => setEmail(e.target.value)} slotProps={{ htmlInput: { "data-cy": "email", }, }} />
+            <TextField fullWidth label="Password" type="password" margin="normal" value={password} onChange={(e) => setPassword(e.target.value)} slotProps={{ htmlInput: { "data-cy": "password", }, }} />
+            {/* =========  Error Message =========  */}
+            {error && (<Typography color="error" sx={{ mt: 2 }}> {error} </Typography>)}
 
-          {/* =========  Submit Button =========  */}
-          {/* =================================================== Login Button ======================================= */}
-          <Button fullWidth variant="contained" sx={{ mt: 3 }} type="submit" data-cy="login-btn" > Login </Button>
-        </form>
-        <Divider sx={{ my: 3 }}> OR </Divider>
-        {/* =========  Sign Up Button =========  */}
-        <Button fullWidth variant="outlined" component={Link} to="/signup" data-cy="signup-btn" > Sign Up </Button>
-      </CardContent>
+            {/* =========  Submit Button =========  */}
+            {/* =================================================== Login Button ======================================= */}
+            <Button fullWidth variant="contained" sx={{ mt: 3 }} type="submit" data-cy="login-btn" > Login </Button>
+          </form>
+          <Divider sx={{ my: 3 }}> OR </Divider>
+          {/* =========  Sign Up Button =========  */}
+          <Button fullWidth variant="outlined" component={Link} to="/signup" data-cy="signup-btn" > Sign Up </Button>
+        </CardContent>
 
-    </Card>
-  </Box>
-);
+      </Card>
+    </Box>
+  );
 }
 
 // renders a login form and handles user authentication by sending a POST request to the backend server. 

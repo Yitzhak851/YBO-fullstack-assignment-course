@@ -46,6 +46,12 @@ export async function login(email, password) {
     },
     body: JSON.stringify({ email, password }),
   });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Login failed");
+  }
+
   return response.json();
 }
 
