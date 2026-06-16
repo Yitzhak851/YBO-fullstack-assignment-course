@@ -10,7 +10,9 @@ function SinglePost({ post }) {
     .slice(0, 3)
     .join("\n");
 
-  const postImage = post.image_url;
+  const fallbackImage = `https://picsum.photos/600/400?random=${post.id}`;
+
+  const postImage = post.image_url || fallbackImage;
 
   return (
     <Card sx={{ p: 2, minHeight: 260 }}>
@@ -36,26 +38,16 @@ function SinglePost({ post }) {
               border: "1px solid #ddd",
             }}
           >
-            {postImage ? (
-              <Box
-                component="img"
-                src={postImage}
-                alt={post.title}
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            ) : (
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{ textAlign: "center", px: 2 }}
-              >
-                No image in this post
-              </Typography>
-            )}
+            <Box
+              component="img"
+              src={postImage}
+              alt={post.title}
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
           </Box>
 
           <Box

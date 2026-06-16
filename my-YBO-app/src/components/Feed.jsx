@@ -1,25 +1,24 @@
-// my-YBO-app/src/components/Feed.jsx : This component is responsible for displaying a feed of posts. It fetches posts from the backend API and displays them in a grid layout. The component also includes a "Load More" button to fetch additional posts when clicked. The useEffect hook is used to fetch the initial set of posts when the component mounts or when the userId parameter changes.
+// my-YBO-app/src/components/Feed.jsx
 import { useEffect, useState } from "react";
-import { Box, Button, CircularProgress } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import SinglePost from "./SinglePost";
 import { fetchPosts } from "../api/api";
 
 function Feed() {
   const { userId } = useParams();
+
   const [posts, setPosts] = useState([]);
   const [start, setStart] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [viewMode, setViewMode] = useState("grid");
 
   async function loadPosts(reset = false) {
     try {
-      console.log("Step A");
       setLoading(true);
 
       const currentStart = reset ? 0 : start;
       const data = await fetchPosts(currentStart, 10, userId);
-
-      console.log("DATA FROM SERVER:", data);
 
       const newPosts = Array.isArray(data) ? data : data.posts || [];
 
@@ -35,18 +34,73 @@ function Feed() {
     }
   }
 
-
-
   useEffect(() => {
-    console.log("Step B");
     loadPosts(true);
   }, [userId]);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 3, maxWidth: 700, mx: "auto", mt: 4, mb: 4, }} >
-      {posts.map((post) => (
-        <SinglePost key={post.id} post={post} />
-      ))}
+    <Box
+      sx={{
+        maxWidth: viewMode === "grid" ? 1200 : 700,
+        mx: "auto",
+        mt: 4,
+        mb: 4,
+        px: 2,
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 2,
+          mb: 3,
+        }}
+      >
+        <Button
+          variant={viewMode === "grid" ? "contained" : "outlined"}
+          onClick={() => setViewMode("grid")}
+        >
+          Grid View
+        </Button>
+
+        <Button
+          variant={viewMode === "list" ? "contained" : "outlined"}
+          onClick={() => setViewMode("list")}
+        >
+          List View
+        </Button>
+      </Box>
+
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns:
+            viewMode === "grid"
+              ? "repeat(auto-fit, minmax(320px, 1fr))"
+              : "1fr",
+          gap: 3,
+        }}
+      >
+        {posts.map((post) => (
+          <SinglePost key={post.id} post={post} />
+        ))}
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          mt: 4,
+        }}
+      >
+        <Button
+          variant="contained"
+          onClick={() => loadPosts(false)}
+          disabled={loading}
+        >
+          {loading ? "Loading..." : "Load More"}
+        </Button>
+      </Box>
     </Box>
   );
 }

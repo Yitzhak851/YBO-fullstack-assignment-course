@@ -71,9 +71,11 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    const normalizedEmail = email.trim().toLowerCase();
+
     const [users] = await db.query(
       "SELECT * FROM users WHERE email = ?",
-      [email]
+      [normalizedEmail]
     );
 
     if (users.length === 0) {

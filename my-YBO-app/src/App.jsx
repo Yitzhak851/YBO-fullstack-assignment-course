@@ -14,6 +14,8 @@ import Users from "./components/Users";
 import UserProfile from "./components/UserProfile";
 import ProtectedRoute from "./auth/ProtectedRoute";
 
+import About from "./components/About";
+
 
 // The App component sets up the routing for the application using React Router. It defines which component should be rendered for each URL path. The ToolbarComponent is included at the top level so that it is displayed on all pages. The ProtectedRoute component is used to protect certain routes that require authentication, such as the NewPost page. If a user tries to access a protected route without being authenticated, they will be redirected to the login page.
 function App() {
@@ -30,6 +32,7 @@ function App() {
         <Route path="/ToolbarComponent" element={<ToolbarComponent />} />
         <Route path="/user/:id" element={<UserProfile />} />        <Route path="/users" element={<Users />} />
         <Route path="/users/:id" element={<UserProfile />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   );

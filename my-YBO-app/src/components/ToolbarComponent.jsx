@@ -1,8 +1,9 @@
-// ToolbarComponent.jsx
+// my-YBO-app/src/components/ToolbarComponent.jsx
 // import necessary components and hooks from Material-UI and React Router
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import logo from "../assets/logo.png";
 
 // This fofo component renders the top navigation bar of the application, 
 // which includes links to different pages and displays the current user's email if they are logged in. 
@@ -15,19 +16,49 @@ function ToolbarComponent() {
     <AppBar position="static">
       <Toolbar>
         {/* ================================= InstaRUNI ================================= */}
-        <Typography variant="h6" sx={{ fontWeight: "bold", mr: 3 }}> 
-          <Button color="inherit" component={Link} to="/"> InstaRUNI </Button>
+        <Typography variant="h6" sx={{ fontWeight: "bold", mr: 3 }}>
+          <Button
+            color="inherit"
+            component={Link}
+            to="/about"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              textTransform: "none",
+              mr: 3,
+            }}
+          >
+            <img
+              src={logo}
+              alt="InstaRUNI Logo"
+              style={{
+                width: "36px",
+                height: "36px",
+                objectFit: "contain",
+              }}
+            />
+
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+              }}
+            >
+              InstaRUNI
+            </Typography>
+          </Button>
         </Typography>
         {isLoggedIn && (<Button variant="contained" color="warning" component={Link} to="/new-post"> + New Post </Button>)}
         <Box sx={{ flexGrow: 1 }} />
         <Box>
-          {/* =================  Home + Users + Login Button ======================  */} 
+          {/* =================  Home + Users + Login Button ======================  */}
           <Button color="inherit" component={Link} to="/"> Home </Button>
           <Button color="inherit" component={Link} to="/users"> Users </Button>
-    
+
           {isLoggedIn ? (
             <> <Typography component="span" sx={{ mx: 2 }}> {currentUser.email} </Typography>
-              {/* =================  Logout Button ======================  */} 
+              {/* =================  Logout Button ======================  */}
               <Button color="warning" onClick={logout}> Logout </Button>
             </>
           ) : (

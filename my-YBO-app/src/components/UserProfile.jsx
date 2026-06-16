@@ -33,8 +33,8 @@ function UserProfile() {
 
         setUser(data.user);
         setPosts(data.posts);
-        setFollowers(data.followers || 0);
-        setFollowing(data.following || 0);
+        setFollowers(data.user.followers || 0);
+        setFollowing(data.user.following || 0);
       } catch (err) {
         console.error("Failed to fetch user profile:", err);
         setError("Failed to load user profile");

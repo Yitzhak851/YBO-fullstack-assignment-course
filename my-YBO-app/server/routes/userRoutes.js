@@ -1,3 +1,6 @@
+// my-YBO-app/server/routes/userRoutes.js - This file defines the routes for user-related operations in the backend server. 
+// It includes routes for fetching a list of users and fetching a specific user's profile along with their posts. The routes interact with the database to retrieve the necessary information and return it as JSON responses. Error handling is included to manage any issues that arise during database queries.
+
 const express = require("express");
 const db = require("../db/db");
 
@@ -10,8 +13,27 @@ router.get("/", async (req, res) => {
     const search = req.query.search || "";
 
     let sql = `
-      SELECT id, email, name, bio, profile_picture, created_at
-      FROM users
+      SELECT
+      u.id,
+      u.email,
+      u.name,
+      u.bio,
+      u.profile_picture,
+      u.created_at,
+      
+      (
+        SELECT COUNT(*)
+        FROM follows f
+        WHERE f.following_id = u.id
+      ) AS followers,
+
+      (
+        SELECT COUNT(*)
+        FROM follows f
+        WHERE f.follower_id = u.id
+      ) AS following
+
+    FROM users u
     `;
 
     const params = [];
@@ -38,7 +60,30 @@ router.get("/:id", async (req, res) => {
     const { id } = req.params;
 
     const [users] = await db.query(
-      "SELECT id, email, name, bio, profile_picture, created_at FROM users WHERE id = ?",
+      `
+      SELECT
+        u.id,
+        u.email,
+        u.name,
+        u.bio,
+        u.profile_picture,
+        u.created_at,
+
+        (
+          SELECT COUNT(*)
+          FROM follows f
+          WHERE f.following_id = u.id
+        ) AS followers,
+
+        (
+          SELECT COUNT(*)
+          FROM follows f
+          WHERE f.follower_id = u.id
+        ) AS following
+
+      FROM users u
+      WHERE u.id = ?
+    `,
       [id]
     );
 
@@ -54,7 +99,10 @@ router.get("/:id", async (req, res) => {
     res.json({
       user: users[0],
       posts,
+      followers: users[0].followers,
+      following: users[0].following,
     });
+
   } catch (err) {
     console.error("Failed to fetch user profile:", err);
     res.status(500).json({ error: err.message });

@@ -1,4 +1,5 @@
 // my-YBO-app/src/component/Users.jsx - display a list of users with pagination and search functionality
+
 import { useEffect, useState } from "react";
 import { Box, Button, CircularProgress, Container, Paper, Table, TableBody, TableCell, TableHead, TableRow, } from "@mui/material";
 import Search from "./Search";
@@ -30,17 +31,18 @@ function Users() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell> Email </TableCell>
-              <TableCell> Posts </TableCell>
-              <TableCell> </TableCell>
+              <TableCell>User</TableCell>
+              <TableCell>Followers</TableCell>
+              <TableCell>Following</TableCell>
+              <TableCell>Profile</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody> {users.map((user) => ( <User key={user.id} user={user} /> ))} </TableBody>
+          <TableBody> {users.map((user) => (<User key={user.id} user={user} />))} </TableBody>
         </Table>
       </Paper>
 
-      <Box sx= {{ textAlign: "center", mt: 3 }}> 
-        { loading ? ( <CircularProgress />) : ( <Button variant="contained" onClick={() => loadUsers(false)}> Load More </Button> )}
+      <Box sx={{ textAlign: "center", mt: 3 }}>
+        {loading ? (<CircularProgress />) : (<Button variant="contained" onClick={() => loadUsers(false)}> Load More </Button>)}
       </Box>
     </Container>
   );
