@@ -43,9 +43,10 @@ function Feed() {
   }, [userId]);
 
   return (
-    <Box sx={{ p: 4 }}>
-      <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 3, maxWidth: 1100, mx: "auto", }} > {posts.map((post) => (<SinglePost key={post.id} post={post} />))}</Box>
-      <Box sx={{ textAlign: "center", mt: 4 }}> {loading ? (<CircularProgress />) : (<Button variant="contained" onClick={() => loadPosts(false)}> Load More </Button>)} </Box>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 3, maxWidth: 700, mx: "auto", mt: 4, mb: 4, }} >
+      {posts.map((post) => (
+        <SinglePost key={post.id} post={post} />
+      ))}
     </Box>
   );
 }
