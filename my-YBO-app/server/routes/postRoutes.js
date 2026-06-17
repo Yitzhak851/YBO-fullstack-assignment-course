@@ -5,35 +5,37 @@ const db = require("../db/db");
 
 const router = express.Router();
 
-// Get all posts with pagination and optional user filter
 router.get("/", async (req, res) => {
   try {
     const start = Number(req.query.start) || 0;
     const limit = Number(req.query.limit) || 10;
     const userId = req.query.userId;
+    const followingOnly = req.query.followingOnly === "true";
+    const currentUserId = req.query.currentUserId;
 
     let sql = `
-      SELECT 
-        posts.id,
-        posts.user_id,
-        posts.title,
-        posts.body,
-        posts.created_at,
-        users.name,
-        users.email,
-        users.profile_picture
+      SELECT posts.*, users.email, users.name, users.profile_picture
       FROM posts
       JOIN users ON posts.user_id = users.id
     `;
 
     const params = [];
 
+    if (followingOnly && currentUserId && !userId) {
+      sql += `
+        JOIN follows 
+        ON follows.following_id = posts.user_id
+        WHERE follows.follower_id = ?
+      `;
+      params.push(currentUserId);
+    }
+
     if (userId) {
-      sql += " WHERE posts.user_id = ?";
+      sql += ` WHERE posts.user_id = ?`;
       params.push(userId);
     }
 
-    sql += " ORDER BY posts.created_at DESC LIMIT ? OFFSET ?";
+    sql += ` ORDER BY posts.id DESC LIMIT ? OFFSET ?`;
     params.push(limit, start);
 
     const [posts] = await db.query(sql, params);
@@ -45,7 +47,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Create a new post
 router.post("/", async (req, res) => {
   try {
     const { userId, title, body } = req.body;
