@@ -57,26 +57,40 @@ export async function createPost(postData) {
   return response.json();
 }
 
-export async function followUser(userId, followerId) {
-  const response = await fetch(`${BASE_URL}/users/${userId}/follow`, {
+export async function followUser(followerId, followingId) {
+  const response = await fetch(`${BASE_URL}/follows`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ followerId }),
+    body: JSON.stringify({
+      follower_id: followerId,
+      following_id: followingId,
+    }),
   });
 
   return response.json();
 }
 
-export async function unfollowUser(userId, followerId) {
-  const response = await fetch(`${BASE_URL}/users/${userId}/follow`, {
+export async function unfollowUser(followerId, followingId) {
+  const response = await fetch(`${BASE_URL}/follows`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ followerId }),
+    body: JSON.stringify({
+      follower_id: followerId,
+      following_id: followingId,
+    }),
   });
+
+  return response.json();
+}
+
+export async function checkIfFollowing(followerId, followingId) {
+  const response = await fetch(
+    `${BASE_URL}/follows/check?follower_id=${followerId}&following_id=${followingId}`
+  );
 
   return response.json();
 }

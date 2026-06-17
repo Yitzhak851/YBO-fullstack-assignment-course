@@ -1,17 +1,19 @@
 // my-YBO-app/src/components/UserProfile.jsx
-// This component fetches and displays a user's profile information,
-// followers/following count, and their posts based on the user ID from the URL parameters.
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   CircularProgress,
   Typography,
 } from "@mui/material";
+import { useAuth } from "../auth/AuthContext";
+import { followUser, unfollowUser, checkIfFollowing } from "../api/api";
+
 
 function UserProfile() {
   const { id } = useParams();
@@ -21,6 +23,10 @@ function UserProfile() {
   const [followers, setFollowers] = useState(0);
   const [following, setFollowing] = useState(0);
   const [error, setError] = useState("");
+  const [viewMode, setViewMode] = useState("grid");
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     async function fetchUserProfile() {
@@ -32,7 +38,7 @@ function UserProfile() {
         const data = await response.json();
 
         setUser(data.user);
-        setPosts(data.posts);
+        setPosts(data.posts || []);
         setFollowers(data.user.followers || 0);
         setFollowing(data.user.following || 0);
       } catch (err) {
@@ -43,6 +49,33 @@ function UserProfile() {
 
     fetchUserProfile();
   }, [id]);
+
+  useEffect(() => {
+    async function checkFollowingStatus() {
+      if (!currentUser || !user) return;
+
+      if (currentUser.id === user.id) return;
+
+      const result = await checkIfFollowing(currentUser.id, user.id);
+      setIsFollowing(result.isFollowing);
+    }
+
+    checkFollowingStatus();
+  }, [currentUser, user]);
+
+  async function handleFollowClick() {
+    if (!currentUser || !user) return;
+
+    if (isFollowing) {
+      await unfollowUser(currentUser.id, user.id);
+      setIsFollowing(false);
+      setFollowers((prev) => prev - 1);
+    } else {
+      await followUser(currentUser.id, user.id);
+      setIsFollowing(true);
+      setFollowers((prev) => prev + 1);
+    }
+  }
 
   if (error) {
     return (
@@ -61,7 +94,7 @@ function UserProfile() {
   }
 
   return (
-    <Box sx={{ maxWidth: 700, mx: "auto", mt: 4 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", mt: 4 }}>
       <Card>
         <CardContent>
           <Avatar
@@ -74,9 +107,7 @@ function UserProfile() {
             {user.name || "Unknown User"}
           </Typography>
 
-          <Typography color="text.secondary">
-            {user.email}
-          </Typography>
+          <Typography color="text.secondary">{user.email}</Typography>
 
           <Typography sx={{ mt: 2 }}>
             {user.bio || "No bio yet"}
@@ -91,31 +122,64 @@ function UserProfile() {
               <strong>Following:</strong> {following}
             </Typography>
           </Box>
+
+          {currentUser && currentUser.id !== user.id && (
+            <Button
+              variant={isFollowing ? "outlined" : "contained"}
+              onClick={handleFollowClick}
+              sx={{ mt: 3 }}
+            >
+              {isFollowing ? "Unfollow" : "Follow"}
+            </Button>
+          )}
         </CardContent>
       </Card>
 
-      <Typography variant="h6" sx={{ mt: 4 }}>
+      <Typography variant="h6" sx={{ mt: 4, mb: 2 }}>
         User Posts
       </Typography>
+
+      <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
+        <Button
+          variant={viewMode === "grid" ? "contained" : "outlined"}
+          onClick={() => setViewMode("grid")}
+        >
+          Grid
+        </Button>
+
+        <Button
+          variant={viewMode === "list" ? "contained" : "outlined"}
+          onClick={() => setViewMode("list")}
+        >
+          List
+        </Button>
+      </Box>
 
       {posts.length === 0 ? (
         <Typography sx={{ mt: 2 }}>
           This user has no posts yet.
         </Typography>
       ) : (
-        posts.map((post) => (
-          <Card key={post.id} sx={{ mt: 2 }}>
-            <CardContent>
-              <Typography variant="h6">
-                {post.title}
-              </Typography>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns:
+              viewMode === "grid"
+                ? "repeat(auto-fill, minmax(250px, 1fr))"
+                : "1fr",
+            gap: 2,
+          }}
+        >
+          {posts.map((post) => (
+            <Card key={post.id}>
+              <CardContent>
+                <Typography variant="h6">{post.title}</Typography>
 
-              <Typography>
-                {post.body}
-              </Typography>
-            </CardContent>
-          </Card>
-        ))
+                <Typography>{post.body}</Typography>
+              </CardContent>
+            </Card>
+          ))}
+        </Box>
       )}
     </Box>
   );

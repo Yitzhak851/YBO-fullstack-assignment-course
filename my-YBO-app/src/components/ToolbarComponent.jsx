@@ -15,36 +15,11 @@ function ToolbarComponent() {
   return (
     <AppBar position="static">
       <Toolbar>
-        {/* ================================= InstaRUNI ================================= */}
+        {/* ======= InstaRUNI ============ */}
         <Typography variant="h6" sx={{ fontWeight: "bold", mr: 3 }}>
-          <Button
-            color="inherit"
-            component={Link}
-            to="/about"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-              textTransform: "none",
-              mr: 3,
-            }}
-          >
-            <img
-              src={logo}
-              alt="InstaRUNI Logo"
-              style={{
-                width: "36px",
-                height: "36px",
-                objectFit: "contain",
-              }}
-            />
-
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: "bold",
-              }}
-            >
+          <Button color="inherit" component={Link} to="/about" sx={{display: "flex", alignItems: "center", gap: 1, textTransform: "none", mr: 3, }}>
+            <img src={logo} alt="InstaRUNI Logo" style={{ width: "36px", height: "36px", objectFit: "contain", }}/>
+            <Typography variant="h6" sx={{ fontWeight: "bold",}}>
               InstaRUNI
             </Typography>
           </Button>
@@ -55,7 +30,6 @@ function ToolbarComponent() {
           {/* =================  Home + Users + Login Button ======================  */}
           <Button color="inherit" component={Link} to="/"> Home </Button>
           <Button color="inherit" component={Link} to="/users"> Users </Button>
-
           {isLoggedIn ? (
             <> <Typography component="span" sx={{ mx: 2 }}> {currentUser.email} </Typography>
               {/* =================  Logout Button ======================  */}

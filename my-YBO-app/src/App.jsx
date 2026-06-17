@@ -30,8 +30,11 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/post/:postId" element={<SinglePost />} />
         <Route path="/ToolbarComponent" element={<ToolbarComponent />} />
-        <Route path="/user/:id" element={<UserProfile />} />        <Route path="/users" element={<Users />} />
+
+        <Route path="/users" element={<Users />} />
+        <Route path="/user/:id" element={<UserProfile />} />
         <Route path="/users/:id" element={<UserProfile />} />
+
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>

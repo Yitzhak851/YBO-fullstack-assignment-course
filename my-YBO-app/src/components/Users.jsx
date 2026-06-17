@@ -25,7 +25,9 @@ function Users() {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Box sx={{ mb: 3 }}> <Search search={search} setSearch={setSearch} /> </Box>
+      <Box sx={{ mb: 3 }}> 
+        <Search search={search} setSearch={setSearch} /> 
+      </Box>
 
       <Paper>
         <Table>

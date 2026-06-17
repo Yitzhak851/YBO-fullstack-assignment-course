@@ -5,6 +5,7 @@ const express = require("express");
 const db = require("../db/db");
 const router = express.Router();
 
+// Get all users with pagination and optional search
 router.get("/", async (req, res) => {
   try {
     const start = Number(req.query.start) || 0;
@@ -53,6 +54,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get a specific user's profile and their posts
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;

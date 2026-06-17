@@ -1,24 +1,27 @@
 // my-YBO-app/server/routes/followRoutes.js - Routes for handling follow/unfollow actions and fetching follow stats
+
 const express = require("express");
 const db = require("../db/db");
+
 const router = express.Router();
 
-router.post("/:userId/follow", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const followerId = req.body.followerId;
-    const followingId = req.params.userId;
+    const { follower_id, following_id } = req.body;
 
-    if (!followerId) {
-      return res.status(400).json({ error: "followerId is required" });
+    console.log("FOLLOW BODY:", req.body);
+
+    if (!follower_id || !following_id) {
+      return res.status(400).json({ error: "Missing follower_id or following_id" });
     }
 
-    if (Number(followerId) === Number(followingId)) {
-      return res.status(400).json({ error: "User cannot follow himself" });
+    if (Number(follower_id) === Number(following_id)) {
+      return res.status(400).json({ error: "You cannot follow yourself" });
     }
 
     await db.query(
       "INSERT IGNORE INTO follows (follower_id, following_id) VALUES (?, ?)",
-      [followerId, followingId]
+      [follower_id, following_id]
     );
 
     res.json({ message: "Followed successfully" });
@@ -28,14 +31,13 @@ router.post("/:userId/follow", async (req, res) => {
   }
 });
 
-router.delete("/:userId/follow", async (req, res) => {
+router.delete("/", async (req, res) => {
   try {
-    const followerId = req.body.followerId;
-    const followingId = req.params.userId;
+    const { follower_id, following_id } = req.body;
 
     await db.query(
       "DELETE FROM follows WHERE follower_id = ? AND following_id = ?",
-      [followerId, followingId]
+      [follower_id, following_id]
     );
 
     res.json({ message: "Unfollowed successfully" });
@@ -45,26 +47,18 @@ router.delete("/:userId/follow", async (req, res) => {
   }
 });
 
-router.get("/:userId/follow-stats", async (req, res) => {
+router.get("/check", async (req, res) => {
   try {
-    const userId = req.params.userId;
+    const { follower_id, following_id } = req.query;
 
-    const [[followers]] = await db.query(
-      "SELECT COUNT(*) AS count FROM follows WHERE following_id = ?",
-      [userId]
+    const [rows] = await db.query(
+      "SELECT * FROM follows WHERE follower_id = ? AND following_id = ?",
+      [follower_id, following_id]
     );
 
-    const [[following]] = await db.query(
-      "SELECT COUNT(*) AS count FROM follows WHERE follower_id = ?",
-      [userId]
-    );
-
-    res.json({
-      followers: followers.count,
-      following: following.count,
-    });
+    res.json({ isFollowing: rows.length > 0 });
   } catch (err) {
-    console.error("Failed to fetch follow stats:", err);
+    console.error("Check follow failed:", err);
     res.status(500).json({ error: err.message });
   }
 });

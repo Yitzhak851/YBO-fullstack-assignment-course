@@ -1,8 +1,8 @@
-// my-YBO-app/server/routes/postRoutes.js - This file defines the routes for handling post-related API requests
+// my-YBO-app/server/routes/postRoutes.js
+
 const express = require("express");
 const db = require("../db/db");
 
-// Create a new router instance
 const router = express.Router();
 
 // Get all posts with pagination and optional user filter
@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
       params.push(userId);
     }
 
-    sql += " ORDER BY posts.id DESC LIMIT ? OFFSET ?";
+    sql += " ORDER BY posts.created_at DESC LIMIT ? OFFSET ?";
     params.push(limit, start);
 
     const [posts] = await db.query(sql, params);
@@ -44,7 +44,6 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 // Create a new post
 router.post("/", async (req, res) => {
@@ -64,14 +63,27 @@ router.post("/", async (req, res) => {
 
     const [result] = await db.query(sql, [userId, title, body]);
 
+    const [newPost] = await db.query(
+      `
+      SELECT 
+        posts.id,
+        posts.user_id,
+        posts.title,
+        posts.body,
+        posts.created_at,
+        users.name,
+        users.email,
+        users.profile_picture
+      FROM posts
+      JOIN users ON posts.user_id = users.id
+      WHERE posts.id = ?
+      `,
+      [result.insertId]
+    );
+
     res.status(201).json({
       message: "Post created successfully",
-      post: {
-        id: result.insertId,
-        user_id: userId,
-        title,
-        body,
-      },
+      post: newPost[0],
     });
   } catch (err) {
     console.error("Failed to create post:", err);
@@ -80,6 +92,5 @@ router.post("/", async (req, res) => {
     });
   }
 });
-
 
 module.exports = router;

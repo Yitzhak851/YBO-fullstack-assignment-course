@@ -1,4 +1,5 @@
 // my-YBO-app/src/components/Search.jsx - This component provides a search bar to find users by name or email and navigate to their profile page
+
 import { useState } from "react";
 import { Box, TextField, List, ListItem, ListItemText } from "@mui/material";
 import { useNavigate } from "react-router-dom";

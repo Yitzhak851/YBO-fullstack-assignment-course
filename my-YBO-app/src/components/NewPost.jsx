@@ -1,3 +1,5 @@
+// src/components/NewPost.jsx - This component renders a form for creating a new post. It allows authenticated users to enter a title and body for their post, and upon submission, it sends the data to the backend server to create the post. If the user is not authenticated or if there are any errors during the post creation process, it displays appropriate error messages.
+
 import { useState } from "react";
 import { Box, Button, Card, CardContent, Container, TextField, Typography, } from "@mui/material";
 import { useNavigate } from "react-router-dom";

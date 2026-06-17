@@ -1,9 +1,13 @@
 // my-YBO-app/server/server.js
+
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const postRoutes = require("./routes/postRoutes");
 const userRoutes = require("./routes/userRoutes");
+
+const followRoutes = require("./routes/followRoutes");
+
 const app = express();
 
 app.use(cors());
@@ -18,6 +22,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/follows", followRoutes);
 
 const PORT = process.env.PORT || 5000;
 
