@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useAuth } from "../auth/AuthContext";
 import { followUser, unfollowUser, checkIfFollowing } from "../api/api";
-
+import SinglePost from "./SinglePost";
 
 function UserProfile() {
   const { id } = useParams();
@@ -53,7 +53,6 @@ function UserProfile() {
   useEffect(() => {
     async function checkFollowingStatus() {
       if (!currentUser || !user) return;
-
       if (currentUser.id === user.id) return;
 
       const result = await checkIfFollowing(currentUser.id, user.id);
@@ -135,7 +134,7 @@ function UserProfile() {
         </CardContent>
       </Card>
 
-      <Typography variant="h6" sx={{ mt: 4, mb: 2 }}>
+      <Typography variant="h6" sx={{ mt: 4, mb: 2, textAlign: "center" }}>
         User Posts
       </Typography>
 
@@ -171,13 +170,7 @@ function UserProfile() {
           }}
         >
           {posts.map((post) => (
-            <Card key={post.id}>
-              <CardContent>
-                <Typography variant="h6">{post.title}</Typography>
-
-                <Typography>{post.body}</Typography>
-              </CardContent>
-            </Card>
+            <SinglePost key={post.id} post={post} viewMode={viewMode} />
           ))}
         </Box>
       )}

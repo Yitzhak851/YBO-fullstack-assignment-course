@@ -2,6 +2,14 @@
 
 import { useState } from "react";
 import { Card, CardContent, Typography, Button, Box } from "@mui/material";
+import DOMPurify from "dompurify";
+import "quill/dist/quill.snow.css";
+
+function decodeHtml(html) {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+}
 
 function timeAgo(dateString) {
   if (!dateString) return "";
@@ -19,54 +27,46 @@ function timeAgo(dateString) {
 
   if (diffHours < 24) {
     const minutes = diffMinutes % 60;
-
-    if (minutes === 0) {
-      return `לפני ${diffHours} שעות`;
-    }
-
+    if (minutes === 0) return `לפני ${diffHours} שעות`;
     return `לפני ${diffHours} שעות ו-${minutes} דקות`;
   }
 
   if (diffDays === 1) return "לפני יום אחד";
-
   return `לפני ${diffDays} ימים`;
 }
 
 function SinglePost({ post, viewMode = "list" }) {
+
+  console.log("POST BODY:", post.body);
+
   const [expanded, setExpanded] = useState(false);
 
-  const shortText = post.body
-    .split("\n")
-    .slice(0, 3)
-    .join("\n");
-
+  const isGrid = viewMode === "grid";
   const fallbackImage = `https://picsum.photos/600/400?random=${post.id}`;
   const postImage = post.image_url || fallbackImage;
 
-  const isGrid = viewMode === "grid";
+  const decodedBody = decodeHtml(post.body || "");
+  const cleanBody = DOMPurify.sanitize(decodedBody);
 
   return (
-    <Card sx={{ p: 2, height: "100%" }}>
+    <Card sx={{ p: 2, height: "100%", overflow: "hidden" }}>
       <CardContent>
         <Box
           sx={{
             display: "flex",
             flexDirection: isGrid ? "column" : "row",
             gap: 3,
-            alignItems: "center",
+            alignItems: "flex-start",
           }}
         >
           <Box
             sx={{
-              width: isGrid ? "100%" : 200,
-              minWidth: isGrid ? "100%" : 200,
-              height: isGrid ? 180 : 150,
+              width: isGrid ? "100%" : 260,
+              minWidth: isGrid ? "100%" : 260,
+              height: isGrid ? 180 : 170,
               borderRadius: 2,
               overflow: "hidden",
               backgroundColor: "#eeeeee",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
               border: "1px solid #ddd",
             }}
           >
@@ -78,16 +78,17 @@ function SinglePost({ post, viewMode = "list" }) {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
+                display: "block",
               }}
             />
           </Box>
 
           <Box
             sx={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
+              flex: 1,
+              minWidth: 0,
               textAlign: "center",
+              overflowWrap: "break-word",
             }}
           >
             <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
@@ -106,9 +107,31 @@ function SinglePost({ post, viewMode = "list" }) {
               הפוסט עלה {timeAgo(post.created_at)}
             </Typography>
 
-            <Typography variant="body1" sx={{ whiteSpace: "pre-line" }}>
-              {expanded ? post.body : shortText + "..."}
-            </Typography>
+            <Box
+              className="ql-editor"
+              sx={{
+                p: "0 !important",
+                textAlign: "left",
+                maxHeight: expanded ? "none" : 120,
+                overflow: "hidden",
+                wordBreak: "break-word",
+
+                "& p": {
+                  margin: "0 0 8px 0",
+                },
+
+                "& ol, & ul": {
+                  margin: "8px 0 8px 24px",
+                  paddingLeft: "20px",
+                  textAlign: "left",
+                },
+
+                "& li": {
+                  marginBottom: "4px",
+                },
+              }}
+              dangerouslySetInnerHTML={{ __html: cleanBody }}
+            />
 
             <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
               <Button

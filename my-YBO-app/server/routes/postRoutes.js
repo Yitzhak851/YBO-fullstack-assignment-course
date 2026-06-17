@@ -49,7 +49,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { userId, title, body } = req.body;
+    const { userId, title, body, image_url } = req.body;
 
     if (!userId || !title || !body) {
       return res.status(400).json({
@@ -58,11 +58,16 @@ router.post("/", async (req, res) => {
     }
 
     const sql = `
-      INSERT INTO posts (user_id, title, body)
-      VALUES (?, ?, ?)
+      INSERT INTO posts (user_id, title, body, image_url)
+      VALUES (?, ?, ?, ?)
     `;
 
-    const [result] = await db.query(sql, [userId, title, body]);
+    const [result] = await db.query(sql, [
+      userId,
+      title,
+      body,
+      image_url || null,
+    ]);
 
     const [newPost] = await db.query(
       `
@@ -71,6 +76,7 @@ router.post("/", async (req, res) => {
         posts.user_id,
         posts.title,
         posts.body,
+        posts.image_url,
         posts.created_at,
         users.name,
         users.email,

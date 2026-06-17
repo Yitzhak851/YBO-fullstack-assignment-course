@@ -1,42 +1,115 @@
 // my-YBO-app/src/components/ToolbarComponent.jsx
-// import necessary components and hooks from Material-UI and React Router
+
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import logo from "../assets/logo.png";
 
-// This fofo component renders the top navigation bar of the application, 
-// which includes links to different pages and displays the current user's email if they are logged in. 
-// It also provides a logout button for authenticated users and a login button for unauthenticated users.
 function ToolbarComponent() {
-  // Access authentication state and functions from the AuthContext
   const { currentUser, isLoggedIn, logout } = useAuth();
-  // Render the AppBar with navigation links and user information
+
   return (
     <AppBar position="static">
       <Toolbar>
-        {/* ======= InstaRUNI ============ */}
-        <Typography variant="h6" sx={{ fontWeight: "bold", mr: 3 }}>
-          <Button color="inherit" component={Link} to="/about" sx={{display: "flex", alignItems: "center", gap: 1, textTransform: "none", mr: 3, }}>
-            <img src={logo} alt="InstaRUNI Logo" style={{ width: "36px", height: "36px", objectFit: "contain", }}/>
-            <Typography variant="h6" sx={{ fontWeight: "bold",}}>
-              InstaRUNI
-            </Typography>
+        {/* Logo */}
+        <Button
+          color="inherit"
+          component={Link}
+          to="/about"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            textTransform: "none",
+            mr: 3,
+          }}
+        >
+          <img
+            src={logo}
+            alt="InstaRUNI Logo"
+            style={{
+              width: "36px",
+              height: "36px",
+              objectFit: "contain",
+            }}
+          />
+
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            InstaRUNI
+          </Typography>
+        </Button>
+
+        {/* New Post */}
+        {isLoggedIn && (
+          <Button
+            variant="contained"
+            color="warning"
+            component={Link}
+            to="/new-post"
+          >
+            + New Post
           </Button>
-        </Typography>
-        {isLoggedIn && (<Button variant="contained" color="warning" component={Link} to="/new-post"> + New Post </Button>)}
+        )}
+
         <Box sx={{ flexGrow: 1 }} />
-        <Box>
-          {/* =================  Home + Users + Login Button ======================  */}
-          <Button color="inherit" component={Link} to="/"> Home </Button>
-          <Button color="inherit" component={Link} to="/users"> Users </Button>
+
+        {/* Navigation */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <Button color="inherit" component={Link} to="/">
+            Home
+          </Button>
+
+          <Button color="inherit" component={Link} to="/users">
+            Users
+          </Button>
+
+          {isLoggedIn && (
+            <Button
+              color="inherit"
+              component={Link}
+              to={`/users/${currentUser.id}`}
+            >
+              My Profile
+            </Button>
+          )}
+
           {isLoggedIn ? (
-            <> <Typography component="span" sx={{ mx: 2 }}> {currentUser.email} </Typography>
-              {/* =================  Logout Button ======================  */}
-              <Button color="warning" onClick={logout}> Logout </Button>
-            </>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                ml: 2,
+              }}
+            >
+              <Typography
+                variant="caption"
+                sx={{
+                  fontSize: "0.75rem",
+                  lineHeight: 1.2,
+                  color: "white",
+                }}
+              >
+                {currentUser.email}
+              </Typography>
+
+              <Button
+                color="warning"
+                onClick={logout}
+                sx={{
+                  p: 0,
+                  minWidth: "auto",
+                  fontSize: "0.75rem",
+                  lineHeight: 1.2,
+                }}
+              >
+                Logout
+              </Button>
+            </Box>
           ) : (
-            <Button color="inherit" component={Link} to="/login"> Login </Button>
+            <Button color="inherit" component={Link} to="/login">
+              Login
+            </Button>
           )}
         </Box>
       </Toolbar>
