@@ -1,7 +1,6 @@
 // my-YBO-app/server/routes/followRoutes.js - Routes for handling follow/unfollow actions and fetching follow stats
 const express = require("express");
 const db = require("../db/db");
-
 const router = express.Router();
 
 router.post("/:userId/follow", async (req, res) => {

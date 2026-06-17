@@ -3,7 +3,6 @@
 
 const express = require("express");
 const db = require("../db/db");
-
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -45,7 +44,6 @@ router.get("/", async (req, res) => {
 
     sql += " ORDER BY id DESC LIMIT ? OFFSET ?";
     params.push(limit, start);
-
     const [users] = await db.query(sql, params);
 
     res.json(users);
@@ -58,7 +56,6 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-
     const [users] = await db.query(
       `
       SELECT

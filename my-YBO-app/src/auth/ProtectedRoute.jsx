@@ -1,3 +1,5 @@
+// my-YBO-app/src/auth/ProtectedRoute.jsx - This file contains the ProtectedRoute component that restricts access to certain routes based on the user's authentication status
+
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 

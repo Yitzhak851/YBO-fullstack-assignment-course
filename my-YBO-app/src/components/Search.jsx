@@ -23,23 +23,15 @@ function Search() {
 
   return (
     <Box sx={{ maxWidth: 500, mx: "auto", my: 3 }}>
-      <TextField
-        fullWidth
-        label="Search users"
-        value={search}
-        onChange={(e) => handleSearch(e.target.value)}
-      />
-
+      <TextField fullWidth label="Search users" value={search} onChange={(e) => handleSearch(e.target.value)}/>
       <List>
         {users.map((user) => (
-          <ListItem
-            key={user.id}
-            button
-            onClick={() => navigate(`/users/${user.id}`)}
-          >
+          
+          <ListItem key={user.id} button onClick={() => navigate(`/users/${user.id}`)}>
             <ListItemText primary={user.name || user.email} secondary={user.email} />
           </ListItem>
-        ))}
+
+        ))}      
       </List>
     </Box>
   );

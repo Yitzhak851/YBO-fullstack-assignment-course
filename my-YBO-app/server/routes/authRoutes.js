@@ -1,16 +1,13 @@
 // my-YBO-app/server/routes/authRoutes.js
 const express = require("express");
 const bcrypt = require("bcrypt");
-
 const db = require("../db/db");
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
   try {
     const { email, password, name } = req.body;
-
     const normalizedEmail = email.trim().toLowerCase();
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(normalizedEmail)) {
@@ -31,9 +28,7 @@ router.post("/signup", async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const displayName = name || normalizedEmail.split("@")[0];
-
     const profilePicture = `https://api.dicebear.com/9.x/adventurer/svg?seed=${encodeURIComponent(
       displayName
     )}`;
@@ -64,7 +59,6 @@ router.post("/signup", async (req, res) => {
     });
   } catch (err) {
     console.error("Signup failed:", err);
-
     res.status(500).json({
       error: err.message,
     });
@@ -74,9 +68,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
     const normalizedEmail = email.trim().toLowerCase();
-
     const [users] = await db.query(
       "SELECT * FROM users WHERE email = ?",
       [normalizedEmail]
@@ -89,7 +81,6 @@ router.post("/login", async (req, res) => {
     }
 
     const user = users[0];
-
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -110,7 +101,6 @@ router.post("/login", async (req, res) => {
     });
   } catch (err) {
     console.error("Login failed:", err);
-
     res.status(500).json({
       error: err.message,
     });
