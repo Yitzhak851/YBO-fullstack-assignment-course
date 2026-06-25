@@ -1,8 +1,0 @@
-{
-  "id": 1,
-  "email": "test@example.com",
-  "name": "Test User",
-  "password": "password123",
-  "bio": "Test user biography",
-  "profile_picture": "https://api.dicebear.com/9.x/adventurer/svg?seed=TestUser"
-}
